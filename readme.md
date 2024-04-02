@@ -1,4 +1,4 @@
-# Three.js Journey
+# Infection Control Alerts
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
