@@ -10,7 +10,7 @@ const loadingBarElement = document.querySelector('.loading-bar')
 
 let sceneReady = false
 const loadingManager = new THREE.LoadingManager(
-    // Loaded
+    // load
     () => {
         // Wait a little
         window.setTimeout(() => {
