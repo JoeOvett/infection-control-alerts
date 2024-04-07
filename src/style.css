@@ -18,27 +18,29 @@ body
     outline: none;
 }
 
-.loading-bar
-{
-    position: absolute;
-    top: 50%;
-    width: 100%;
+.loading-bar {
     height: 8px;
     background: linear-gradient(to right, #ff0095, #ffe4f4);
-    transform: scaleX(0.3);
+    transform: scaleX(0); /* Start from 0 */
     transform-origin: top left;
     transition: transform 0.5s;
 }
 .loading-container {
-    text-align: center; /* Center aligns the text */
-    margin: 20px 0; /* Adds some space above and below the loading elements */
+    position: absolute;
+    top: 50%; /* Center vertically, adjust as needed */
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%); /* Align the center of the container with the middle of the page */
+    text-align: center;
 }
 
+
 .loading-text {
-    color: #b3ff00; /* Set the text color */
-    margin-bottom: 10px; /* Adds some space between the text and the bar */
-    font-size: 2000px; /* Adjust the font size as needed */
-    font-family: Arial, sans-serif; /* Set the font family, adjust as desired */
+    color: #ff0095; /* Set the text color, adjust as needed */      
+    margin-bottom: 10px; /* Space between the text and the loading bar */
+    font-size: 1.5em; /* Set to a reasonable size */
+    font-family: Arial, sans-serif;
+    z-index: 10; /* Ensure it's above the loading bar */
 }
 
 
