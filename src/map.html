@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/index.html">Map</a></li>
+      </ul>
+    </nav>
+    
+    <div id="map"></div>
+    <script>
+      var map;
+
+      function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 50.819, lng: -0.116},
+        zoom: 16,
+        mapId: 'd4eea5122e611ccc' // Your custom map ID
+    });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw&map_ids=d4eea5122e611ccc&callback=initMap"
+    async defer></script>
+  </body>
+</html>
