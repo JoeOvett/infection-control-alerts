@@ -13,6 +13,9 @@
     "vite-plugin-copy": "^0.1.6"
   },
   "dependencies": {
+    "csv-parse": "^5.5.5",
+    "csv-parser": "^3.0.0",
+    "fs": "^0.0.1-security",
     "gsap": "^3.11.4",
     "lil-gui": "^0.17.0",
     "three": "^0.148.0",
