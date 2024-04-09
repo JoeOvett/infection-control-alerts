@@ -20,11 +20,39 @@
       var map;
 
       function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 50.819, lng: -0.116},
-        zoom: 16,
-        mapId: 'd4eea5122e611ccc' // Your custom map ID
+  const map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 50.819, lng: -0.116 },
+    zoom: 16,
+    mapId: 'd4eea5122e611ccc' // Your custom map ID
+  });
+
+  const locations = [
+    {
+      title: 'Brighton University Health Centre',
+      lat: 50.842,
+      lng: -0.119
+    },
+    {
+      title: 'Albion Street Surgery',
+      lat: 50.828,
+      lng: -0.134
+    },
+    {
+      title: 'Foundry Healthcare Lewes',
+      lat: 50.89258496671786,
+      lng: 0.05906800230918135
+    }
+    // ... add more locations here
+  ];
+
+  locations.forEach((location) => {
+    new google.maps.Marker({
+      position: { lat: location.lat, lng: location.lng },
+      map,
+      title: location.title
     });
+  });
+    
 }
 
     </script>
