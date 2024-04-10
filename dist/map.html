@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WinPath Source Map</title>
+    
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="./assets/style-3facc197.css">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/index.html">Map</a></li>
+      </ul>
+    </nav>
+    
+    <div id="map"></div>
+    <script>
+      var map;
+
+      function initMap() {
+  const map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 50.819, lng: -0.116 },
+    zoom: 16,
+    mapId: 'd4eea5122e611ccc' // Your custom map ID
+  });
+
+  const locations = [
+    {
+      title: 'Brighton University Health Centre',
+      lat: 50.842,
+      lng: -0.119
+    },
+    {
+      title: 'Albion Street Surgery',
+      lat: 50.828,
+      lng: -0.134
+    },
+    {
+      title: 'Foundry Healthcare Lewes',
+      lat: 50.89258496671786,
+      lng: 0.05906800230918135
+    },
+    {
+      title: 'Ardingly Court Surgery',
+      lat: 50.82135945613737,
+      lng: -0.13280546333063536      
+    },
+    {
+      title: 'The Avenue Surgery',
+      lat: 50.84555639370724,
+      lng: -0.11392028859381825      
+    },
+    {
+      title: 'The Haven Practice',
+      lat: 50.84285526555008,
+      lng: -0.14267185063636387      
+    },
+    {
+      title: '138 Beaconsfield Villas Surgery',
+      lat: 50.84401726748758,
+      lng: -0.14312524392876552
+      //Moved to 175 Preston Road from 07 Feb 2005
+    },
+    {
+      title: 'Wellsbourne Healthcare CIC',
+      lat: 50.825627710002,
+      lng: -0.10730767778546368      
+    },
+    {
+      title: 'The Brow Medical Centre',
+      lat: 50.95536953754166,
+      lng: -0.13446358374356193      
+    },
+    {
+      title: 'WellBN Burwash',
+      lat: 50.85126576544983,
+      lng: -0.18817988522136722      
+    },
+    {
+      title: 'County Oak Medical Centre',
+      lat: 50.861823014252174,
+      lng: -0.12774641994409885      
+    },
+    {
+      title: 'Trinity Medical Centre',
+      lat: 50.83121841894693,
+      lng: -0.1717593246872213      
+    },
+    {
+      title: 'Chapel Street Surgery',
+      lat: 50.79319382513223,
+      lng: 0.05164147720236935      
+    },
+    {
+      title: 'Allied Medical Practice',
+      lat: 50.84035623711637,
+      lng: -0.12282571672228972      
+    },
+    {
+      title: 'WellBN Benfield',
+      lat: 50.838284472552225,
+      lng: -0.21102619622556518      
+    },
+    {
+      title: 'Goodwood Court Dental Surgery',
+      lat: 50.8325605087323,
+      lng: -0.16215905600904587      
+    },
+    {
+      title: 'Charter Medical Centre',
+      lat: 50.831570622819875,
+      lng: -0.15807207663872555      
+    },
+    {
+      title: 'Lions Dene',
+      lat: 50.85626874652266,
+      lng: -0.1566120821374577      
+    },
+    {
+      title: 'Dolphons Practice',
+      lat: 51.000340169378,
+      lng: -0.11607032223475972
+      //Nightingale Primary Cary
+    },
+    {
+      title: 'Ouse Valley Practice',
+      lat: 51.05899832956482,
+      lng: -0.19936455334077244
+      //Dumbledore Primary Care Centre
+    },
+    {
+      title: 'Eaton Place Surgery',
+      lat: 50.81755892002222,
+      lng: -0.1160251119559124      
+    },
+    {
+      title: 'The Surgery',
+      lat: 50.83164086592124,
+      lng: -0.12147028113488753      
+    },
+    {
+      title: 'Greaves',
+      lat: 50.83790378951545,
+      lng: -0.14019799152001927
+      //2a Florence Road
+    },
+    {
+      title: 'Lindfield Medical Centre',
+      lat: 51.01283632443289,
+      lng: -0.0808535456576204
+    },
+    {
+      title: 'North Laine Medical Centre',
+      lat: 50.827042861009645,
+      lng: -0.1367908524565927
+    },
+    {
+      title: 'Mid Sussex Health Care',
+      lat: 50.922253869407434,
+      lng: -0.1397968155324117
+    },
+    {
+      title: 'Willow House',
+      lat: 50.841430202283476,
+      lng: -0.10167332586345851
+    },
+    {
+      title: 'Henfield Medical Centre',
+      lat: 50.936156322998556,
+      lng: -0.2756475811278858
+    },
+    {
+      title: 'Stanford Medical Centre',
+      lat: 50.82789631921024,
+      lng: -0.12492497488062847
+    },
+    {
+      title: 'Park Crescent Health Centre',
+      lat: 50.83231264810883,
+      lng: -0.12910119641280376
+    },
+    {
+      title: 'Links Road Surgery',
+      lat: 50.837068125609946,
+      lng: -0.20734503985808336
+    },
+    // ... add more locations here
+  ];
+
+  locations.forEach((location) => {
+    new google.maps.Marker({
+      position: { lat: location.lat, lng: location.lng },
+      map,
+      title: location.title
+    });
+  });
+    
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw&callback=initMap"
+    async defer></script>
+  </body>
+</html>

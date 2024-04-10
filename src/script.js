@@ -10,22 +10,28 @@ const loadingBarElement = document.querySelector('.loading-bar')
 
 let sceneReady = false
 const loadingManager = new THREE.LoadingManager(
-    // load
-    () => {
-        // Wait a little
-        window.setTimeout(() => {
-            // Animate overlay
-            gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
+// Loaded
+() => {
+    // Wait a little
+    window.setTimeout(() => {
+        // Animate overlay
+        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0, delay: 1 })
 
-            // Update loadingBarElement
-            loadingBarElement.classList.add('ended')
-            loadingBarElement.style.transform = ''
-        }, 500)
+        // Update loadingBarElement
+        loadingBarElement.classList.add('ended')
+        loadingBarElement.style.transform = ''
 
-        window.setTimeout(() => {
-            sceneReady = true
-        }, 2000)
-    },
+        // Optionally fade out the loading text here as well
+        gsap.to(".loading-text", { duration: 1, opacity: 0, onComplete: () => {
+            document.querySelector('.loading-text').style.display = 'none';
+        }});
+    }, 500)
+
+    window.setTimeout(() => {
+        sceneReady = true
+    }, 2000)
+},
+
 
     // Progress
     (itemUrl, itemsLoaded, itemsTotal) => {
@@ -199,7 +205,7 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 controls.autoRotate = true  // Enable auto rotate
-controls.autoRotateSpeed = 0.8  // Set the rotation speed
+controls.autoRotateSpeed = 0.1  // Set the rotation speed
 
 /**
  * Renderer
