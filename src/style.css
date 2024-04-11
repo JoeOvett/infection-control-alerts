@@ -1,123 +1,129 @@
-*
-{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html,
-body
-{
-    overflow: hidden;
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+#map {
+  height: 100%;
+}
+
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
 }
 
 .loading-bar {
-    height: 8px;
-    background: linear-gradient(to right, #ff0095, #ffe4f4);
-    transform: scaleX(0); /* Start from 0 */
-    transform-origin: top left;
-    transition: transform 0.5s;
-}
-.loading-container {
-    position: absolute;
-    top: 50%; /* Center vertically, adjust as needed */
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%); /* Align the center of the container with the middle of the page */
-    text-align: center;
+  height: 8px;
+  background: linear-gradient(to right, #ff0095, #ffe4f4);
+  transform: scaleX(0); /* Start from 0 */
+  transform-origin: top left;
+  transition: transform 0.5s;
 }
 
+.loading-container {
+  position: absolute;
+  top: 50%; /* Center vertically, adjust as needed */
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%); /* Align the center of the container with the middle of the page */
+  text-align: center;
+}
 
 .loading-text {
-    color: #ff0095; /* Set the text color, adjust as needed */      
-    margin-bottom: 10px; /* Space between the text and the loading bar */
-    font-size: 1.5em; /* Set to a reasonable size */
-    font-family: Arial, sans-serif;
-    z-index: 10; /* Ensure it's above the loading bar */
+  color: #ff0095; /* Set the text color, adjust as needed */
+  margin-bottom: 10px; /* Space between the text and the loading bar */
+  font-size: 1.5em; /* Set to a reasonable size */
+  font-family: Arial, sans-serif;
+  z-index: 10; /* Ensure it's above the loading bar */
 }
 
-
-.loading-bar.ended
-{
-    transform: scaleX(0);
-    transform-origin: 100% 0;
-    transition: transform 1.5s ease-in-out;
+.loading-bar.ended {
+  transform: scaleX(0);
+  transform-origin: 100% 0;
+  transition: transform 1.5s ease-in-out;
 }
 
-.point
-{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    /* pointer-events: none; */
+.point {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* pointer-events: none; */
 }
 
-.point .label
-{
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #00000077;
-    border: 1px solid #ffffff77;
-    color: #ffffff;
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: center;
-    line-height: 40px;
-    font-weight: 100;
-    font-size: 14px;
-    cursor: help;
-    transform: scale(0, 0);
-    transition: transform 0.3s;
+.point .label {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: auto; /* Allow width to grow */
+  min-width: 40px; /* Minimum width */
+  height: 40px;
+  padding: 0 10px; /* Add some padding to the sides */
+  border-radius: 50%; /* Rounded edges */
+  background: #00000077;
+  border: 1px solid #ffffff77;
+  color: #ffffff;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 100;
+  font-size: 14px;
+  cursor: help;
+  transform: scale(0, 0);
+  transition: transform 0.3s;
+  white-space: nowrap; /* Prevent line breaks */
+  overflow: hidden; /* Prevent overflow */
+  text-overflow: ellipsis; /* Add an ellipsis to text that overflows */
 }
 
-.point .text
-{
-    position: absolute;
-    top: 30px;
-    left: -120px;
-    width: 200px;
-    padding: 20px;
-    border-radius: 4px;
-    background: #00000077;
-    border: 1px solid #ffffff77;
-    color: #ffffff;
-    line-height: 1.3em;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
+.point .text {
+  position: absolute;
+  top: 30px;
+  left: -120px;
+  width: 200px; /* Set a fixed width */
+  padding: 20px;
+  border-radius: 4px;
+  background: #00000077;
+  border: 1px solid #ffffff77;
+  color: #ffffff;
+  line-height: 1.3em;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: normal; /* Allow line breaks */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Ellipsis for overflow */
 }
 
-.point:hover .text
-{
-    opacity: 1;
+.point:hover .text {
+  opacity: 1;
 }
 
-.point.visible .label
-{
-    transform: scale(1, 1);
+.point.visible .label {
+  transform: scale(1, 1);
 }
 
 nav {
-    position: fixed;
+  position: fixed;
   top: 0;
   width: 100%;
   background: #333;
   z-index: 1000; /* High z-index to ensure it's on top */
   padding: 10px 0;
 }
+
 nav ul {
   list-style: none;
   padding: 0;
@@ -125,14 +131,17 @@ nav ul {
   display: flex;
   justify-content: center; /* This centers your navbar items horizontally */
 }
+
 nav ul li {
   margin: 0 20px;
 }
+
 nav ul li a {
   text-decoration: none;
   color: white;
   font-weight: bold;
 }
+
 /* Add a hover effect for the links */
 nav ul li a:hover {
   color: #ff0099;
