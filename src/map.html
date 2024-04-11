@@ -1,206 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>WinPath Source Map</title>
     <link rel="stylesheet" href="./style.css">
-    <style>
-
-    </style>
-  </head>
-  <body>
+</head>
+<body>
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/index.html">Map</a></li>
-      </ul>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/index.html">Map</a></li>
+        </ul>
     </nav>
-    
+
     <div id="map"></div>
     <script>
-      var map;
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 50.819, lng: -0.116},
+                zoom: 8, // Start with a zoomed out view
+                mapId: 'd4eea5122e611ccc' // Your custom map ID
+            });
 
-      function initMap() {
-  const map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 50.819, lng: -0.116 },
-    zoom: 16,
-    mapId: 'd4eea5122e611ccc' // Your custom map ID
-  });
-
-  const locations = [
-    {
-      title: 'Brighton University Health Centre',
-      lat: 50.842,
-      lng: -0.119
-    },
-    {
-      title: 'Albion Street Surgery',
-      lat: 50.828,
-      lng: -0.134
-    },
-    {
-      title: 'Foundry Healthcare Lewes',
-      lat: 50.89258496671786,
-      lng: 0.05906800230918135
-    },
-    {
-      title: 'Ardingly Court Surgery',
-      lat: 50.82135945613737,
-      lng: -0.13280546333063536      
-    },
-    {
-      title: 'The Avenue Surgery',
-      lat: 50.84555639370724,
-      lng: -0.11392028859381825      
-    },
-    {
-      title: 'The Haven Practice',
-      lat: 50.84285526555008,
-      lng: -0.14267185063636387      
-    },
-    {
-      title: '138 Beaconsfield Villas Surgery',
-      lat: 50.84401726748758,
-      lng: -0.14312524392876552
-      //Moved to 175 Preston Road from 07 Feb 2005
-    },
-    {
-      title: 'Wellsbourne Healthcare CIC',
-      lat: 50.825627710002,
-      lng: -0.10730767778546368      
-    },
-    {
-      title: 'The Brow Medical Centre',
-      lat: 50.95536953754166,
-      lng: -0.13446358374356193      
-    },
-    {
-      title: 'WellBN Burwash',
-      lat: 50.85126576544983,
-      lng: -0.18817988522136722      
-    },
-    {
-      title: 'County Oak Medical Centre',
-      lat: 50.861823014252174,
-      lng: -0.12774641994409885      
-    },
-    {
-      title: 'Trinity Medical Centre',
-      lat: 50.83121841894693,
-      lng: -0.1717593246872213      
-    },
-    {
-      title: 'Chapel Street Surgery',
-      lat: 50.79319382513223,
-      lng: 0.05164147720236935      
-    },
-    {
-      title: 'Allied Medical Practice',
-      lat: 50.84035623711637,
-      lng: -0.12282571672228972      
-    },
-    {
-      title: 'WellBN Benfield',
-      lat: 50.838284472552225,
-      lng: -0.21102619622556518      
-    },
-    {
-      title: 'Goodwood Court Dental Surgery',
-      lat: 50.8325605087323,
-      lng: -0.16215905600904587      
-    },
-    {
-      title: 'Charter Medical Centre',
-      lat: 50.831570622819875,
-      lng: -0.15807207663872555      
-    },
-    {
-      title: 'Lions Dene',
-      lat: 50.85626874652266,
-      lng: -0.1566120821374577      
-    },
-    {
-      title: 'Dolphons Practice',
-      lat: 51.000340169378,
-      lng: -0.11607032223475972
-      //Nightingale Primary Cary
-    },
-    {
-      title: 'Ouse Valley Practice',
-      lat: 51.05899832956482,
-      lng: -0.19936455334077244
-      //Dumbledore Primary Care Centre
-    },
-    {
-      title: 'Eaton Place Surgery',
-      lat: 50.81755892002222,
-      lng: -0.1160251119559124      
-    },
-    {
-      title: 'The Surgery',
-      lat: 50.83164086592124,
-      lng: -0.12147028113488753      
-    },
-    {
-      title: 'Greaves',
-      lat: 50.83790378951545,
-      lng: -0.14019799152001927
-      //2a Florence Road
-    },
-    {
-      title: 'Lindfield Medical Centre',
-      lat: 51.01283632443289,
-      lng: -0.0808535456576204
-    },
-    {
-      title: 'North Laine Medical Centre',
-      lat: 50.827042861009645,
-      lng: -0.1367908524565927
-    },
-    {
-      title: 'Mid Sussex Health Care',
-      lat: 50.922253869407434,
-      lng: -0.1397968155324117
-    },
-    {
-      title: 'Willow House',
-      lat: 50.841430202283476,
-      lng: -0.10167332586345851
-    },
-    {
-      title: 'Henfield Medical Centre',
-      lat: 50.936156322998556,
-      lng: -0.2756475811278858
-    },
-    {
-      title: 'Stanford Medical Centre',
-      lat: 50.82789631921024,
-      lng: -0.12492497488062847
-    },
-    {
-      title: 'Park Crescent Health Centre',
-      lat: 50.83231264810883,
-      lng: -0.12910119641280376
-    },
-    {
-      title: 'Links Road Surgery',
-      lat: 50.837068125609946,
-      lng: -0.20734503985808336
-    },
+const locations = [
+    { title: 'Brighton University Health Centre', lat: 50.842, lng: -0.119 },
+    { title: 'Albion Street Surgery', lat: 50.828, lng: -0.134 },
+    { title: 'Foundry Healthcare Lewes', lat: 50.892585, lng: 0.059068 },
+    { title: 'Ardingly Court Surgery', lat: 50.821359, lng: -0.132805 },
+    { title: 'The Avenue Surgery', lat: 50.845556, lng: -0.113920 },
+    { title: 'The Haven Practice', lat: 50.842855, lng: -0.142672 },
+    { title: '138 Beaconsfield Villas Surgery', lat: 50.844017, lng: -0.143125 },
+    { title: 'Wellsbourne Healthcare CIC', lat: 50.825628, lng: -0.107308 },
+    { title: 'The Brow Medical Centre', lat: 50.955370, lng: -0.134464 },
+    { title: 'WellBN Burwash', lat: 50.851266, lng: -0.188180 },
+    { title: 'County Oak Medical Centre', lat: 50.861823, lng: -0.127746 },
+    { title: 'Trinity Medical Centre', lat: 50.831218, lng: -0.171759 },
+    { title: 'Chapel Street Surgery', lat: 50.793194, lng: 0.051641 },
+    { title: 'Allied Medical Practice', lat: 50.840356, lng: -0.122826 },
+    { title: 'WellBN Benfield', lat: 50.838284, lng: -0.211026 },
+    { title: 'Goodwood Court Dental Surgery', lat: 50.832561, lng: -0.162159 },
+    { title: 'Charter Medical Centre', lat: 50.831571, lng: -0.158072 },
+    { title: 'Lions Dene', lat: 50.856269, lng: -0.156612 },
+    { title: 'Dolphins Practice', lat: 51.000340, lng: -0.116070 },
+    { title: 'Ouse Valley Practice', lat: 51.058998, lng: -0.199365 },
+    { title: 'Eaton Place Surgery', lat: 50.817559, lng: -0.116025 },
+    { title: 'The Surgery', lat: 50.831641, lng: -0.121470 },
+    { title: 'Greaves', lat: 50.837904, lng: -0.140198 },
+    { title: 'Lindfield Medical Centre', lat: 51.012836, lng: -0.080854 },
+    { title: 'North Laine Medical Centre', lat: 50.827043, lng: -0.136791 },
+    { title: 'Mid Sussex Health Care', lat: 50.922254, lng: -0.139797 },
+    { title: 'Willow House', lat: 50.841430, lng: -0.101673 },
+    { title: 'Henfield Medical Centre', lat: 50.936156, lng: -0.275648 },
+    { title: 'Stanford Medical Centre', lat: 50.827896, lng: -0.124925 },
+    { title: 'Park Crescent Health Centre', lat: 50.832313, lng: -0.129101 },
+    { title: 'Links Road Surgery', lat: 50.837068, lng: -0.207345 }
     // ... add more locations here
-  ];
+];
 
-  locations.forEach((location) => {
-    new google.maps.Marker({
-      position: { lat: location.lat, lng: location.lng },
-      map,
-      title: location.title
-    });
-  });
-    
-}
+    // Define one InfoWindow
+    let infoWindow = new google.maps.InfoWindow();
 
+locations.forEach((location, index) => {
+                setTimeout(() => {
+                    let marker = new google.maps.Marker({
+                        position: { lat: location.lat, lng: location.lng },
+                        map: map,
+                        title: location.title,
+                        animation: google.maps.Animation.DROP
+                    });
+                    
+        // Marker click listener
+        marker.addListener('click', () => {
+            // Set the content of the InfoWindow
+            infoWindow.setContent(location.title);
+
+            // Open the InfoWindow on the marker
+            infoWindow.open(map, marker);
+        });
+                    // Toggle Bounce animation on click
+                    marker.addListener('click', () => {
+                        if (marker.getAnimation() !== null) {
+                            marker.setAnimation(null);
+                        } else {
+                            marker.setAnimation(google.maps.Animation.BOUNCE);
+                        }
+                    });
+                }, index * 200); // Each marker drops 200ms apart
+            });
+
+            // Smoothly zoom in after a delay
+            setTimeout(() => {
+                let currentZoom = map.getZoom();
+                let interval = setInterval(() => {
+                    if (currentZoom < 16) {
+                        currentZoom++;
+                        map.setZoom(currentZoom);
+                    } else {
+                        clearInterval(interval); // Stop the interval when the desired zoom level is reached
+                    }
+                }, 200); // Set zoom level every 200 milliseconds
+            }, 3000);
+        }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw&callback=initMap"
     async defer></script>
-  </body>
+</body>
 </html>
