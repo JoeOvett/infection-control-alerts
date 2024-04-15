@@ -17,8 +17,11 @@
         function initMap() {
             const map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 50.819, lng: -0.116},
-                zoom: 8, // Start with a zoomed out view
-                mapId: 'd4eea5122e611ccc' // Your custom map ID
+                zoom: 8,
+                mapId: '8e6deb7a6acd250c',
+                tilt: 45,
+                heading: 0,
+                isFractionalZoomEnabled: true
             });
 
 const locations = [
@@ -56,10 +59,21 @@ const locations = [
     // ... add more locations here
 ];
 
-    // Define one InfoWindow
-    let infoWindow = new google.maps.InfoWindow();
 
-locations.forEach((location, index) => {
+            let infoWindow = new google.maps.InfoWindow();
+            let userInteracted = false;
+
+            map.addListener('tilesloaded', function() {
+                // Add events to check for user interaction
+                ['mousedown', 'wheel', 'touchstart', 'dragstart'].forEach(event => 
+                    map.getDiv().addEventListener(event, () => {
+                        userInteracted = true;
+                        stopAutomaticControls();
+                    })
+                );
+            });
+
+            locations.forEach((location, index) => {
                 setTimeout(() => {
                     let marker = new google.maps.Marker({
                         position: { lat: location.lat, lng: location.lng },
@@ -67,38 +81,51 @@ locations.forEach((location, index) => {
                         title: location.title,
                         animation: google.maps.Animation.DROP
                     });
-                    
-        // Marker click listener
-        marker.addListener('click', () => {
-            // Set the content of the InfoWindow
-            infoWindow.setContent(location.title);
 
-            // Open the InfoWindow on the marker
-            infoWindow.open(map, marker);
-        });
-                    // Toggle Bounce animation on click
                     marker.addListener('click', () => {
-                        if (marker.getAnimation() !== null) {
-                            marker.setAnimation(null);
-                        } else {
-                            marker.setAnimation(google.maps.Animation.BOUNCE);
-                        }
+                        infoWindow.setContent(location.title);
+                        infoWindow.open(map, marker);
+                        toggleBounce(marker);
                     });
-                }, index * 200); // Each marker drops 200ms apart
+                }, index * 200);
             });
 
-            // Smoothly zoom in after a delay
-            setTimeout(() => {
-                let currentZoom = map.getZoom();
-                let interval = setInterval(() => {
-                    if (currentZoom < 16) {
-                        currentZoom++;
-                        map.setZoom(currentZoom);
-                    } else {
-                        clearInterval(interval); // Stop the interval when the desired zoom level is reached
-                    }
-                }, 200); // Set zoom level every 200 milliseconds
-            }, 3000);
+            const degreesPerSecond = 3;
+            let cameraAnimationRequest;
+            function animateCamera(time) {
+                if (!userInteracted) {
+                    map.moveCamera({heading: (time / 1000) * degreesPerSecond % 360});
+                    cameraAnimationRequest = requestAnimationFrame(animateCamera);
+                }
+            }
+            cameraAnimationRequest = requestAnimationFrame(animateCamera);
+
+            let smoothZoomTimeout;
+            function smoothZoom(map, targetZoom, currentZoom) {
+                if (!userInteracted && currentZoom !== targetZoom) {
+                    let step = (targetZoom - currentZoom) / 50;
+                    smoothZoomTimeout = setTimeout(() => {
+                        map.setZoom(currentZoom + step);
+                        smoothZoom(map, targetZoom, currentZoom + step);
+                    }, 20);
+                }
+            }
+            smoothZoomTimeout = setTimeout(() => smoothZoom(map, 16, map.getZoom()), 3000);
+
+            // Function to stop all automatic controls
+            function stopAutomaticControls() {
+                cancelAnimationFrame(cameraAnimationRequest);
+                clearTimeout(smoothZoomTimeout);
+            }
+        }
+
+        function toggleBounce(marker) {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(() => marker.setAnimation(null), 1400);
+            }
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw&callback=initMap"
