@@ -20,6 +20,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'src', 'index.html'),
         map: resolve(__dirname, 'src', 'map.html'),
+        worthing: resolve(__dirname, 'src', 'worthing.html'),
+        prh: resolve(__dirname, 'src', 'prh.html'),
       },
     },
   },

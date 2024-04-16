@@ -120,16 +120,26 @@ debugObject.envMapIntensity = 2.5
 /**
  * Models
  */
-gltfLoader.load(
-    '/models/rsch.gltf',
-    (gltf) => {
-        gltf.scene.scale.set(2.5, 2.5, 2.5)
-        gltf.scene.rotation.y = Math.PI * 0.5
-        scene.add(gltf.scene)
+const path = window.location.pathname;
+let modelFile = 'rsch.gltf'; // default model
 
-        updateAllMaterials()
+if (path.includes('worthing.html')) {
+    modelFile = 'worthing.gltf';
+} else if (path.includes('prh.html')) {
+    modelFile = 'prh.gltf';
+}
+
+gltfLoader.load(
+    `/models/${modelFile}`,
+    (gltf) => {
+        gltf.scene.scale.set(2.5, 2.5, 2.5);
+        gltf.scene.rotation.y = Math.PI * 0.5;
+        scene.add(gltf.scene);
+
+        updateAllMaterials();
     }
-)
+);
+
 
 /**
  * Points of interest
