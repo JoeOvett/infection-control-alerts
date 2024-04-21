@@ -1,25 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
-
-* {
+@import"https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap";* {
   margin: 0;
-  padding: 0;
+  padding: 0
 }
 
-html, body {
+html,body {
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0
 }
 
 .landing-page {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  font-family: 'Roboto', Arial, sans-serif;
-  background: radial-gradient(circle at top right, #0f0c29, #302b63, #24243e);
+  font-family: Roboto,Arial,sans-serif;
+  background: radial-gradient(circle at top right,#0f0c29,#302b63,#24243e);
   overflow: auto;
-  min-height: 100vh; /* Use 100vh to take the full viewport height */
-  padding-top: 50px; /* Adjust this padding to prevent cut-off */
+  min-height: 100vh;
+  padding-top: 50px
 }
 
 #map {
@@ -28,22 +26,22 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 1
 }
 
 .webgl {
   position: fixed;
   top: 0;
   left: 0;
-  outline: none;
+  outline: none
 }
 
 .loading-bar {
   height: 8px;
-  background: linear-gradient(to right, #ff0095, #ffe4f4);
+  background: linear-gradient(to right,#ff0095,#ffe4f4);
   transform: scaleX(0);
   transform-origin: top left;
-  transition: transform 0.5s;
+  transition: transform .5s
 }
 
 .loading-container {
@@ -52,27 +50,27 @@ html, body {
   left: 0;
   width: 100%;
   transform: translateY(-50%);
-  text-align: center;
+  text-align: center
 }
 
 .loading-text {
   color: #ff0095;
   margin-bottom: 10px;
   font-size: 1.5em;
-  font-family: Arial, sans-serif;
-  z-index: 10;
+  font-family: Arial,sans-serif;
+  z-index: 10
 }
 
 .loading-bar.ended {
   transform: scaleX(0);
   transform-origin: 100% 0;
-  transition: transform 1.5s ease-in-out;
+  transition: transform 1.5s ease-in-out
 }
 
 .point {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 50%
 }
 
 .point .label {
@@ -86,18 +84,18 @@ html, body {
   border-radius: 50%;
   background: #00000077;
   border: 1px solid #ffffff77;
-  color: #ffffff;
-  font-family: Helvetica, Arial, sans-serif;
+  color: #fff;
+  font-family: Helvetica,Arial,sans-serif;
   text-align: center;
   line-height: 40px;
   font-weight: 100;
   font-size: 14px;
   cursor: help;
   transform: scale(0);
-  transition: transform 0.3s;
+  transition: transform .3s;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis
 }
 
 .point .text {
@@ -109,25 +107,25 @@ html, body {
   border-radius: 4px;
   background: #00000077;
   border: 1px solid #ffffff77;
-  color: #ffffff;
+  color: #fff;
   line-height: 1.3em;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica,Arial,sans-serif;
   font-weight: 100;
   font-size: 14px;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity .3s;
   pointer-events: none;
   white-space: normal;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis
 }
 
 .point:hover .text {
-  opacity: 1;
+  opacity: 1
 }
 
 .point.visible .label {
-  transform: scale(1);
+  transform: scale(1)
 }
 
 nav {
@@ -136,7 +134,7 @@ nav {
   width: 100%;
   background: #333;
   z-index: 1000;
-  padding: 10px 0;
+  padding: 10px 0
 }
 
 nav ul {
@@ -144,21 +142,21 @@ nav ul {
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center;
+  justify-content: center
 }
 
 nav ul li {
-  margin: 0 20px;
+  margin: 0 20px
 }
 
 nav ul li a {
   text-decoration: none;
-  color: white;
-  font-weight: bold;
+  color: #fff;
+  font-weight: 700
 }
 
 nav ul li a:hover {
-  color: #ff0099;
+  color: #f09
 }
 
 .card-container {
@@ -166,72 +164,66 @@ nav ul li a:hover {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 20px;
+  padding: 20px
 }
 
 .card {
-  background: #0f0c29; /* Dark background */
+  background: #0f0c29;
   border-radius: 10px;
-  overflow: hidden; /* Ensure the border-radius applies to the image as well */
+  overflow: hidden;
   text-align: center;
   display: flex;
-  flex-direction: column; /* Stack the image and text vertically */
-  justify-content: flex-start; /* Align the image to the top */
-  align-items: center; /* Center-align the flex items */
-  text-decoration: none; /* Remove text decoration for anchor elements */
-  justify-content: space-between; /* Space out the image and text */
-  width: 300px; /* Fixed width for the card */
-  height: 370px; /* Adjusted height for the card */
-  color: white; /* Fallback text color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  transition: transform 0.2s, box-shadow 0.3s;
-  margin-bottom: 20px; /* Space between cards */
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  justify-content: space-between;
+  width: 300px;
+  height: 370px;
+  color: #fff;
+  box-shadow: 0 4px 8px #0000001a;
+  transition: transform .2s,box-shadow .3s;
+  margin-bottom: 20px
 }
 
 .card img {
-  width: 100%; /* Make the image fill the card */
-  height: 150px; /* Fixed height for the image */
-  object-fit: cover; /* Ensure the image covers the area, might crop */
-  flex-shrink: 0; /* Prevent image from shrinking */
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  flex-shrink: 0
 }
 
 .card-content {
   display: flex;
-  flex-direction: column; /* Stack h3 and p vertically */
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  flex-grow: 1; /* Allow text section to grow */
-  padding: 10px; /* Padding inside the text container */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px
 }
 
 .card:hover {
-  background: #120c1c; /* Slightly lighter background on hover */
+  background: #120c1c;
   cursor: pointer;
-  text-shadow:
-    0 0 3px #bc13fe, /* Purple glow on hover */
-    0 0 3px #bc13fe; /* Keep the radius moderate for legibility */
-    transform: translateY(-5px); /* Lift card on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  text-shadow: 0 0 3px #bc13fe,0 0 3px #bc13fe;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px #0003
 }
 
-
-
-.card h3, .card p {
+.card h3,.card p {
   -webkit-background-clip: text;
   background-clip: text;
   text-fill-color: transparent;
-  padding: 5px 10px; /* Padding inside the text container */
-
+  padding: 5px 10px
 }
 
-
 .card h3 {
-  margin-bottom: 0.5em; /* Space between the title and paragraph */
-  font-size: 1.8em; /* Adjusted size for consistency */
+  margin-bottom: .5em;
+  font-size: 1.8em
 }
 
 .card p {
-  margin: 0; /* Reset margin */
-  font-size: 1em; /* Adjusted size for consistency */
-  text-align: center; /* Center-align the text */
+  margin: 0;
+  font-size: 1em;
+  text-align: center
 }
