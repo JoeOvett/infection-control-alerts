@@ -19,6 +19,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src', 'index.html'),
+        rsch: resolve(__dirname, 'src', 'rsch.html'),
         map: resolve(__dirname, 'src', 'map.html'),
         worthing: resolve(__dirname, 'src', 'worthing.html'),
         prh: resolve(__dirname, 'src', 'prh.html'),

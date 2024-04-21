@@ -3,20 +3,31 @@
   padding: 0;
 }
 
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto; /* Changed from hidden to auto */
+}
+
+.landing-page {
+  background: #005eb8; /* NHS Blue */
+  color: white; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #map {
   height: 100%;
-  /*height: calc(100% - 50px); /* Adjust height to take up remaining space below the navbar */
-  /*margin-top: 38px; /* Push the map down by the navbar's height */
-  /*margin-bottom: 38px; /* Add some space below the map */
-  
+  width: 100%; /* Ensure the map container has a defined width */
+  position: absolute; /* Ensures it covers the full screen, adjust as needed */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Make sure it's not behind any other content */
 }
 
 .webgl {
@@ -61,7 +72,6 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* pointer-events: none; */
 }
 
 .point .label {
@@ -146,17 +156,43 @@ nav ul li a {
   font-weight: bold;
 }
 
-/* Add a hover effect for the links */
 nav ul li a:hover {
   color: #ff0099;
 }
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 100%;
-      }
-      /* Style the HTML body to take full height */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white cards */
+  border: 2px solid #ffffff; /* Solid white border */
+  border-radius: 8px; /* Rounded corners for the cards */
+  width: 200px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #005eb8; /* NHS Blue for text */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #005eb8; /* NHS Blue for headings */
+}
+
+.card p {
+  font-size: 0.9em;
+  color: #002855; /* A darker shade of blue for text */
+}

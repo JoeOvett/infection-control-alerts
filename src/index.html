@@ -3,50 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="3d-model" content="rsch.gltf">
-    <title>Infection Control Alerts</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Welcome to Infection Control Alerts</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/map.html">Map</a></li>
-          <li><a href="/prh.html">PRH</a></li>
-          <li><a href="/worthing.html">Worthing</a></li>
-        </ul>
-      </nav>
-      
-
-    <canvas class="webgl"></canvas>
-
-    <div class="loading-container">
-        <div class="loading-text">Infection Control Alerts is loading...</div>
-        <div class="loading-bar"></div>
+<body class="landing-page">
+    <div class="card-container">
+        <a href="rsch.html" class="card">
+            <h3>Royal Sussex</h3>
+            <p>Explore the RSCH 3D Model</p>
+        </a>
+        <a href="prh.html" class="card">
+            <h3>Princess Royal</h3>
+            <p>View PRH Information</p>
+        </a>
+        <a href="map.html" class="card">
+            <h3>Map View</h3>
+            <p>Access the Map Overview</p>
+        </a>
+        <a href="worthing.html" class="card">
+            <h3>Worthing Hospital</h3>
+            <p>Discover Worthing Details</p>
+        </a>
     </div>
-    
-
-    <div class="point point-0">
-        <div class="label">RSCH</div>
-        <div class="text">Level 12</div>
-    </div>
-    <div class="point point-1">
-        <div class="label">Ward</div>
-        <div class="text">C. diff5</div>
-    </div>
-    <div class="point point-2">
-        <div class="label">Organism</div>
-        <div class="text">New alert</div>
-    </div>
-    <div class="point point-3">
-        <div class="label">A&E</div>
-        <div class="text">MRSA</div>
-    </div>
-    <div class="point point-4">
-        <div class="label">Courtyard</div>
-        <div class="text">Shigella</div>
-    </div>
-    
-    <script type="module" src="./script.js"></script>
 </body>
 </html>
