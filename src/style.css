@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -7,27 +9,26 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto; /* Changed from hidden to auto */
 }
 
 .landing-page {
-  background: #005eb8; /* NHS Blue */
-  color: white; /* Text color */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: radial-gradient(circle at top right, #0f0c29, #302b63, #24243e);
+  overflow: auto;
+  min-height: 100vh; /* Use 100vh to take the full viewport height */
+  padding-top: 50px; /* Adjust this padding to prevent cut-off */
 }
 
 #map {
   height: 100%;
-  width: 100%; /* Ensure the map container has a defined width */
-  position: absolute; /* Ensures it covers the full screen, adjust as needed */
+  width: 100%;
+  position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; /* Make sure it's not behind any other content */
+  z-index: 1;
 }
 
 .webgl {
@@ -40,26 +41,26 @@ html, body {
 .loading-bar {
   height: 8px;
   background: linear-gradient(to right, #ff0095, #ffe4f4);
-  transform: scaleX(0); /* Start from 0 */
+  transform: scaleX(0);
   transform-origin: top left;
   transition: transform 0.5s;
 }
 
 .loading-container {
   position: absolute;
-  top: 50%; /* Center vertically, adjust as needed */
+  top: 50%;
   left: 0;
   width: 100%;
-  transform: translateY(-50%); /* Align the center of the container with the middle of the page */
+  transform: translateY(-50%);
   text-align: center;
 }
 
 .loading-text {
-  color: #ff0095; /* Set the text color, adjust as needed */
-  margin-bottom: 10px; /* Space between the text and the loading bar */
-  font-size: 1.5em; /* Set to a reasonable size */
+  color: #ff0095;
+  margin-bottom: 10px;
+  font-size: 1.5em;
   font-family: Arial, sans-serif;
-  z-index: 10; /* Ensure it's above the loading bar */
+  z-index: 10;
 }
 
 .loading-bar.ended {
@@ -78,11 +79,11 @@ html, body {
   position: absolute;
   top: -20px;
   left: -20px;
-  width: auto; /* Allow width to grow */
-  min-width: 40px; /* Minimum width */
+  width: auto;
+  min-width: 40px;
   height: 40px;
-  padding: 0 10px; /* Add some padding to the sides */
-  border-radius: 50%; /* Rounded edges */
+  padding: 0 10px;
+  border-radius: 50%;
   background: #00000077;
   border: 1px solid #ffffff77;
   color: #ffffff;
@@ -92,18 +93,18 @@ html, body {
   font-weight: 100;
   font-size: 14px;
   cursor: help;
-  transform: scale(0, 0);
+  transform: scale(0);
   transition: transform 0.3s;
-  white-space: nowrap; /* Prevent line breaks */
-  overflow: hidden; /* Prevent overflow */
-  text-overflow: ellipsis; /* Add an ellipsis to text that overflows */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .point .text {
   position: absolute;
   top: 30px;
   left: -120px;
-  width: 200px; /* Set a fixed width */
+  width: 200px;
   padding: 20px;
   border-radius: 4px;
   background: #00000077;
@@ -116,9 +117,9 @@ html, body {
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
-  white-space: normal; /* Allow line breaks */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Ellipsis for overflow */
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .point:hover .text {
@@ -126,7 +127,7 @@ html, body {
 }
 
 .point.visible .label {
-  transform: scale(1, 1);
+  transform: scale(1);
 }
 
 nav {
@@ -134,7 +135,7 @@ nav {
   top: 0;
   width: 100%;
   background: #333;
-  z-index: 1000; /* High z-index to ensure it's on top */
+  z-index: 1000;
   padding: 10px 0;
 }
 
@@ -143,7 +144,7 @@ nav ul {
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: center; /* This centers your navbar items horizontally */
+  justify-content: center;
 }
 
 nav ul li {
@@ -169,30 +170,68 @@ nav ul li a:hover {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white cards */
-  border: 2px solid #ffffff; /* Solid white border */
-  border-radius: 8px; /* Rounded corners for the cards */
-  width: 200px;
-  padding: 20px;
+  background: #0f0c29; /* Dark background */
+  border-radius: 10px;
+  overflow: hidden; /* Ensure the border-radius applies to the image as well */
   text-align: center;
-  text-decoration: none;
-  color: #005eb8; /* NHS Blue for text */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column; /* Stack the image and text vertically */
+  justify-content: flex-start; /* Align the image to the top */
+  align-items: center; /* Center-align the flex items */
+  text-decoration: none; /* Remove text decoration for anchor elements */
+  justify-content: space-between; /* Space out the image and text */
+  width: 300px; /* Fixed width for the card */
+  height: 370px; /* Adjusted height for the card */
+  color: white; /* Fallback text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
   transition: transform 0.2s, box-shadow 0.3s;
+  margin-bottom: 20px; /* Space between cards */
+}
+
+.card img {
+  width: 100%; /* Make the image fill the card */
+  height: 150px; /* Fixed height for the image */
+  object-fit: cover; /* Ensure the image covers the area, might crop */
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column; /* Stack h3 and p vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  flex-grow: 1; /* Allow text section to grow */
+  padding: 10px; /* Padding inside the text container */
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  background: #120c1c; /* Slightly lighter background on hover */
+  cursor: pointer;
+  text-shadow:
+    0 0 3px #bc13fe, /* Purple glow on hover */
+    0 0 3px #bc13fe; /* Keep the radius moderate for legibility */
+    transform: translateY(-5px); /* Lift card on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
 }
 
+
+
+.card h3, .card p {
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-fill-color: transparent;
+  padding: 5px 10px; /* Padding inside the text container */
+
+}
+
+
 .card h3 {
-  margin: 0;
-  font-size: 1.5em;
-  color: #005eb8; /* NHS Blue for headings */
+  margin-bottom: 0.5em; /* Space between the title and paragraph */
+  font-size: 1.8em; /* Adjusted size for consistency */
 }
 
 .card p {
-  font-size: 0.9em;
-  color: #002855; /* A darker shade of blue for text */
+  margin: 0; /* Reset margin */
+  font-size: 1em; /* Adjusted size for consistency */
+  text-align: center; /* Center-align the text */
 }
