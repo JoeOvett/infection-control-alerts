@@ -3,21 +3,40 @@
   padding: 0
 }
 
-html,body {
-  height: 100%;
+html, body {
   margin: 0;
-  padding: 0
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
+.gear-icon {
+  width: 100%; /* Adjust based on your layout needs */
+  height: auto;
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+.card:hover .gear-icon {
+  content: url('gears.gif'); /* Change to animated GIF on hover */
+}
+.exit-icon {
+  width: 100%; /* Adjust based on your layout needs */
+  height: auto;
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+.card:hover .exit-icon {
+  content: url('exit.gif'); /* Change to animated GIF on hover */
+}
+
 
 .landing-page {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
   justify-content: flex-start;
   font-family: Roboto,Arial,sans-serif;
   background: radial-gradient(circle at top right,#0f0c29,#302b63,#24243e);
-  overflow: auto;
-  min-height: 100vh;
-  padding-top: 50px
+  overflow: auto;  
+  padding-top: 0px
 }
 
 #map {
@@ -162,9 +181,11 @@ nav ul li a:hover {
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px
+  justify-content: space-around; /* This will space your cards nicely */
+  align-items: flex-start; /* Align cards to the top */
+  max-width: 1200px; /* Maximum width of the container */
+  margin: auto; /* Center the container on the page */
+  gap: 20px; /* Gap between the cards */
 }
 
 .card {
@@ -203,7 +224,7 @@ nav ul li a:hover {
 }
 
 .card:hover {
-  background: #120c1c;
+  background: #7e3562;
   cursor: pointer;
   text-shadow: 0 0 3px #bc13fe,0 0 3px #bc13fe;
   transform: translateY(-5px);
@@ -226,4 +247,9 @@ nav ul li a:hover {
   margin: 0;
   font-size: 1em;
   text-align: center
+}
+@media only screen and (min-width: 1024px) {
+  .landing-page {
+    justify-content: center; /* This will vertically center the cards on desktop */
+  }
 }
