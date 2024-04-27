@@ -23,6 +23,26 @@ html, body {
   padding: 20px 0;  /* Padding to add some spacing around the text */
 }
 
+.login-icon {
+  width: 100%; /* Adjust based on your layout needs */
+  height: auto;
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+.card:hover .login-icon {
+  content: url('login.gif'); /* Change to animated GIF on hover */
+}
+
+.data-icon {
+  width: 100%; /* Adjust based on your layout needs */
+  height: auto;
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+.card:hover .data-icon {
+  content: url('data.gif'); /* Change to animated GIF on hover */
+}
+
 .gear-icon {
   width: 100%; /* Adjust based on your layout needs */
   height: auto;
@@ -199,7 +219,7 @@ nav ul li a:hover {
   flex-wrap: wrap;
   justify-content: space-around; /* This will space your cards nicely */
   align-items: flex-start; /* Align cards to the top */
-  max-width: 1200px; /* Maximum width of the container */
+  max-width: 1300px; /* Maximum width of the container */
   margin: auto; /* Center the container on the page */
   gap: 20px; /* Gap between the cards */
 }
