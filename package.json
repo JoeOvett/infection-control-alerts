@@ -13,6 +13,8 @@
     "vite-plugin-copy": "^0.1.6"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "@googlemaps/markerclusterer": "^2.5.3",
     "csv-parse": "^5.5.5",
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",

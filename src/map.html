@@ -17,58 +17,28 @@
       </nav>
 
     <div id="map"></div>
+    
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw&callback=initMap"
+    async defer></script>
+</body>
     <script>
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 50.819, lng: -0.116},
-                zoom: 8,
-                mapId: '8e6deb7a6acd250c',
-                tilt: 45,
-                heading: 0,
-                isFractionalZoomEnabled: true
-            });
-
-const locations = [
-    { title: 'Brighton University Health Centre', lat: 50.842, lng: -0.119 },
-    { title: 'Albion Street Surgery', lat: 50.828, lng: -0.134 },
-    { title: 'Foundry Healthcare Lewes', lat: 50.892585, lng: 0.059068 },
-    { title: 'Ardingly Court Surgery', lat: 50.821359, lng: -0.132805 },
-    { title: 'The Avenue Surgery', lat: 50.845556, lng: -0.113920 },
-    { title: 'The Haven Practice', lat: 50.842855, lng: -0.142672 },
-    { title: '138 Beaconsfield Villas Surgery', lat: 50.844017, lng: -0.143125 },
-    { title: 'Wellsbourne Healthcare CIC', lat: 50.825628, lng: -0.107308 },
-    { title: 'The Brow Medical Centre', lat: 50.955370, lng: -0.134464 },
-    { title: 'WellBN Burwash', lat: 50.851266, lng: -0.188180 },
-    { title: 'County Oak Medical Centre', lat: 50.861823, lng: -0.127746 },
-    { title: 'Trinity Medical Centre', lat: 50.831218, lng: -0.171759 },
-    { title: 'Chapel Street Surgery', lat: 50.793194, lng: 0.051641 },
-    { title: 'Allied Medical Practice', lat: 50.840356, lng: -0.122826 },
-    { title: 'WellBN Benfield', lat: 50.838284, lng: -0.211026 },
-    { title: 'Goodwood Court Dental Surgery', lat: 50.832561, lng: -0.162159 },
-    { title: 'Charter Medical Centre', lat: 50.831571, lng: -0.158072 },
-    { title: 'Lions Dene', lat: 50.856269, lng: -0.156612 },
-    { title: 'Dolphins Practice', lat: 51.000340, lng: -0.116070 },
-    { title: 'Ouse Valley Practice', lat: 51.058998, lng: -0.199365 },
-    { title: 'Eaton Place Surgery', lat: 50.817559, lng: -0.116025 },
-    { title: 'The Surgery', lat: 50.831641, lng: -0.121470 },
-    { title: 'Greaves', lat: 50.837904, lng: -0.140198 },
-    { title: 'Lindfield Medical Centre', lat: 51.012836, lng: -0.080854 },
-    { title: 'North Laine Medical Centre', lat: 50.827043, lng: -0.136791 },
-    { title: 'Mid Sussex Health Care', lat: 50.922254, lng: -0.139797 },
-    { title: 'Willow House', lat: 50.841430, lng: -0.101673 },
-    { title: 'Henfield Medical Centre', lat: 50.936156, lng: -0.275648 },
-    { title: 'Stanford Medical Centre', lat: 50.827896, lng: -0.124925 },
-    { title: 'Park Crescent Health Centre', lat: 50.832313, lng: -0.129101 },
-    { title: 'Links Road Surgery', lat: 50.837068, lng: -0.207345 }
-    // ... add more locations here
-];
+function initMap() {
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 50.819, lng: -0.116 },
+        zoom: 8,
+        maxZoom: 21,
+        mapId: '8e6deb7a6acd250c',
+        tilt: 45,
+        heading: 0,
+        isFractionalZoomEnabled: true
+    });
 
 
             let infoWindow = new google.maps.InfoWindow();
             let userInteracted = false;
 
             map.addListener('tilesloaded', function() {
-                // Add events to check for user interaction
                 ['mousedown', 'wheel', 'touchstart', 'dragstart'].forEach(event => 
                     map.getDiv().addEventListener(event, () => {
                         userInteracted = true;
@@ -76,63 +46,90 @@ const locations = [
                     })
                 );
             });
+            
+// Initialize the MarkerClusterer object
+const markerCluster = new MarkerClusterer(map, [], {
+    imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+    maxZoom: 15,  // Set maxZoom to 15 or adjust according to your needs
+});
 
-            locations.forEach((location, index) => {
-                setTimeout(() => {
-                    let marker = new google.maps.Marker({
-                        position: { lat: location.lat, lng: location.lng },
-                        map: map,
-                        title: location.title,
-                        animation: google.maps.Animation.DROP
-                    });
 
-                    marker.addListener('click', () => {
-                        infoWindow.setContent(location.title);
-                        infoWindow.open(map, marker);
-                        toggleBounce(marker);
-                    });
-                }, index * 200);
+// Fetch locations from the server
+fetch('https://jo435.brighton.domains/ci601/get-locations.php')
+    .then(response => response.json())
+    .then(locations => {
+        locations.forEach(location => {
+            const position = new google.maps.LatLng(parseFloat(location.Latitude), parseFloat(location.Longitude));
+            const marker = new google.maps.Marker({
+                position: position,
+                title: location.Name, // Setting the title to Name for more clarity
+                animation: google.maps.Animation.DROP
             });
 
-            const degreesPerSecond = 3;
-            let cameraAnimationRequest;
-            function animateCamera(time) {
-                if (!userInteracted) {
-                    map.moveCamera({heading: (time / 1000) * degreesPerSecond % 360});
-                    cameraAnimationRequest = requestAnimationFrame(animateCamera);
-                }
-            }
+            marker.addListener('click', () => {
+                // Constructing content for the infoWindow
+                const contentString = `
+                    <div>
+                        <h2>${location.Name}</h2>
+                        <p><strong>Lab No:</strong> ${location.LabNo}</p>
+                        <p><strong>Sex:</strong> ${location.Sex.trim()}</p>
+                        <p><strong>Age:</strong> ${location.Age}</p>
+                        <p><strong>Collected:</strong> ${location.Collected}</p>
+                        <p><strong>Received:</strong> ${location.Received}</p>
+                        <p><strong>Sample:</strong> ${location.Sample}</p>
+                        <p><strong>Isolate:</strong> ${location.Isolate}</p>
+                        ${[...Array(18)].map((_, i) => location[`Antibiotic${i+1}`] ? `<p><strong>Antibiotic ${i+1}:</strong> ${location[`Antibiotic${i+1}`]}</p>` : '').join('')}
+                    </div>
+                `;
+                infoWindow.setContent(contentString);
+                infoWindow.open(map, marker);
+            });
+
+            // Add the marker to the MarkerClusterer
+            markerCluster.addMarker(marker);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching locations:', error);
+    });
+
+    const degreesPerSecond = 3;
+    let cameraAnimationRequest;
+    function animateCamera(time) {
+        if (!userInteracted) {
+            map.moveCamera({ heading: (time / 1000) * degreesPerSecond % 360 });
             cameraAnimationRequest = requestAnimationFrame(animateCamera);
-
-            let smoothZoomTimeout;
-            function smoothZoom(map, targetZoom, currentZoom) {
-                if (!userInteracted && currentZoom !== targetZoom) {
-                    let step = (targetZoom - currentZoom) / 50;
-                    smoothZoomTimeout = setTimeout(() => {
-                        map.setZoom(currentZoom + step);
-                        smoothZoom(map, targetZoom, currentZoom + step);
-                    }, 20);
-                }
-            }
-            smoothZoomTimeout = setTimeout(() => smoothZoom(map, 16, map.getZoom()), 3000);
-
-            // Function to stop all automatic controls
-            function stopAutomaticControls() {
-                cancelAnimationFrame(cameraAnimationRequest);
-                clearTimeout(smoothZoomTimeout);
-            }
         }
+    }
+    cameraAnimationRequest = requestAnimationFrame(animateCamera);
 
-        function toggleBounce(marker) {
-            if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-            } else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-                setTimeout(() => marker.setAnimation(null), 1400);
-            }
+    let smoothZoomTimeout;
+    function smoothZoom(map, targetZoom, currentZoom) {
+        if (!userInteracted && currentZoom !== targetZoom) {
+            let step = (targetZoom - currentZoom) / 50;
+            smoothZoomTimeout = setTimeout(() => {
+                map.setZoom(currentZoom + step);
+                smoothZoom(map, targetZoom, currentZoom + step);
+            }, 20);
         }
+    }
+    smoothZoomTimeout = setTimeout(() => smoothZoom(map, 16, map.getZoom()), 3000);
+
+    function stopAutomaticControls() {
+        cancelAnimationFrame(cameraAnimationRequest);
+        clearTimeout(smoothZoomTimeout);
+    }
+
+    function toggleBounce(marker) {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(() => marker.setAnimation(null), 1400);
+        }
+    }
+}
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw&callback=initMap"
-    async defer></script>
-</body>
+    <!-- Include the MarkerClusterer library -->
+
 </html>
