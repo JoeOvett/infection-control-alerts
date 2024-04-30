@@ -21,6 +21,7 @@
     "fs": "^0.0.1-security",
     "gsap": "^3.11.4",
     "lil-gui": "^0.17.0",
+    "supercluster": "^8.0.1",
     "three": "^0.148.0",
     "vercel": "^32.3.0"
   }
