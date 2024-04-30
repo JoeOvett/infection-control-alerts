@@ -69,6 +69,14 @@ loader.load().then(async () => {
         infoWindow.open(map, marker);
       });
 
+      // Add click event listener to close info window if clicked
+      google.maps.event.addListener(infoWindow, 'domready', () => {
+        const infoWindowContent = document.querySelector('.gm-style-iw');
+        infoWindowContent.addEventListener('click', () => {
+          infoWindow.close();
+        });
+      });
+
       return marker;
     });
 
