@@ -16,6 +16,8 @@ loader.load().then(async () => {
 
   // Ensure the AdvancedMarkerElement is loaded
   const { AdvancedMarkerElement } = google.maps.marker;
+  const userId = 1; // Or fetch this from a login session, local storage, etc.
+
 
   try {
     // Fetch JSON data from the specified URL
@@ -26,7 +28,7 @@ loader.load().then(async () => {
     let locations = await response.json();
 
     // Limit the number of locations to 1000
-    locations = locations.slice(0, 4000);
+    locations = locations.slice(0, 40);
 
     // Log the number of locations received
     console.log(`Number of locations received: ${locations.length}`);
@@ -39,18 +41,43 @@ loader.load().then(async () => {
       // Create content for info window
       const antibioticsContent = getAntibioticsContent(data);
       const content = `
-        <div>
-          <h2>${data.Name}</h2>
-          <p><strong>Lab No:</strong> ${data.LabNo.trim()}</p>
-          <p><strong>Sex:</strong> ${data.Sex.trim()}</p>
-          <p><strong>Age:</strong> ${data.Age.trim()}</p>
-          <p><strong>Collected:</strong> ${data.Collected}</p>
-          <p><strong>Received:</strong> ${data.Received}</p>
-          <p><strong>Sample:</strong> ${data.Sample.trim()}</p>
-          <p><strong>Isolate:</strong> ${data.Isolate}</p>
-          ${antibioticsContent}
+      <div>
+        <h2>${data.Name}</h2>
+        <p><strong>Lab No:</strong> ${data.LabNo.trim()}</p>
+        <p><strong>Sex:</strong> ${data.Sex.trim()}</p>
+        <p><strong>Age:</strong> ${data.Age.trim()}</p>
+        <p><strong>Collected:</strong> ${data.Collected}</p>
+        <p><strong>Received:</strong> ${data.Received}</p>
+        <p><strong>Sample:</strong> ${data.Sample.trim()}</p>
+        <p><strong>Isolate:</strong> ${data.Isolate}</p>
+        ${antibioticsContent}
+        <button id="acknowledgeBtn-${data.LabNo.trim()}">Acknowledge</button>
         </div>
-      `;
+    `;
+    function acknowledgeRecord(labNo, userId, data) {
+        fetch('https://jo435.brighton.domains/ci601/records.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `user_id=${encodeURIComponent(userId)}&LabNo=${encodeURIComponent(labNo)}&Sex=${encodeURIComponent(data.Sex.trim())}&Age=${encodeURIComponent(data.Age.trim())}&Collected=${encodeURIComponent(data.Collected)}&Received=${encodeURIComponent(data.Received)}&Source=${encodeURIComponent(data.Source.trim())}&Name=${encodeURIComponent(data.Name.trim())}&Sample=${encodeURIComponent(data.Sample.trim())}&Isolate=${encodeURIComponent(data.Isolate.trim())}&Antibiotic1=${encodeURIComponent(data.Antibiotic1)}`,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log('Record acknowledged:', data);
+                alert('Record has been acknowledged successfully!');
+            } else {
+                console.error('Error acknowledging record:', data.error);
+                alert('Failed to acknowledge the record.');
+            }
+        })
+        .catch(error => console.error('Error in AJAX call:', error));
+    }
+    
+    
+    
+    
 
       // Create info window
       const infoWindow = new google.maps.InfoWindow({
@@ -64,18 +91,29 @@ loader.load().then(async () => {
         title: data.Name // You can customize the title as needed
       });
 
-      // Add click event listener to marker
-      marker.addListener('click', () => {
-        infoWindow.open(map, marker);
-      });
+// Add click event listener to marker
+marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+});
 
-      // Add click event listener to close info window if clicked
-      google.maps.event.addListener(infoWindow, 'domready', () => {
-        const infoWindowContent = document.querySelector('.gm-style-iw');
-        infoWindowContent.addEventListener('click', () => {
-          infoWindow.close();
+// After the InfoWindow is displayed and its content is loaded
+google.maps.event.addListener(infoWindow, 'domready', () => {
+    const btnId = `acknowledgeBtn-${data.LabNo.trim()}`;
+    const acknowledgeBtn = document.getElementById(btnId);
+    if (acknowledgeBtn) {
+        acknowledgeBtn.addEventListener('click', () => {
+            // Pass the entire 'data' object or individual fields needed
+            acknowledgeRecord(data.LabNo.trim(), userId, data);
         });
-      });
+    }
+
+    // Optional: close info window on click
+    const infoWindowContent = document.querySelector('.gm-style-iw');
+    infoWindowContent.addEventListener('click', () => {
+        infoWindow.close();
+    });
+});
+
 
       return marker;
     });

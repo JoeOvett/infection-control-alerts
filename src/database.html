@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Records</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lab No</th>
+                <th>Sex</th>
+                <th>Age</th>
+                <th>Collected</th>
+                <th>Received</th>
+                <th>Sample</th>
+                <th>Isolate</th>
+                <th>Antibiotics</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('get_records.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Failed to load data:', data.error);
+            } else {
+                const tableBody = document.querySelector('table tbody');
+                data.forEach(record => {
+                    const row = document.createElement('tr');
+                    
+                    let antibioticsContent = '';
+                    for (let i = 1; i <= 18; i++) {
+                        const antibioticKey = `Antibiotic${i}`;
+                        if (record[antibioticKey]) {
+                            antibioticsContent += `${antibioticKey}: ${record[antibioticKey].trim()}, `;
+                        }
+                    }
+
+                    row.innerHTML = `
+                        <td>${record.Name}</td>
+                        <td>${record.LabNo.trim()}</td>
+                        <td>${record.Sex.trim()}</td>
+                        <td>${record.Age.trim()}</td>
+                        <td>${record.Collected}</td>
+                        <td>${record.Received}</td>
+                        <td>${record.Sample.trim()}</td>
+                        <td>${record.Isolate}</td>
+                        <td>${antibioticsContent.slice(0, -2)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        })
+        .catch(error => console.error('Error loading data:', error));
+    });
+    </script>
+</body>
+</html>
