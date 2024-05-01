@@ -55,25 +55,36 @@ loader.load().then(async () => {
         </div>
     `;
     function acknowledgeRecord(labNo, userId, data) {
-        fetch('https://jo435.brighton.domains/ci601/records.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `user_id=${encodeURIComponent(userId)}&LabNo=${encodeURIComponent(labNo)}&Sex=${encodeURIComponent(data.Sex.trim())}&Age=${encodeURIComponent(data.Age.trim())}&Collected=${encodeURIComponent(data.Collected)}&Received=${encodeURIComponent(data.Received)}&Source=${encodeURIComponent(data.Source.trim())}&Name=${encodeURIComponent(data.Name.trim())}&Sample=${encodeURIComponent(data.Sample.trim())}&Isolate=${encodeURIComponent(data.Isolate.trim())}&Antibiotic1=${encodeURIComponent(data.Antibiotic1)}`,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                console.log('Record acknowledged:', data);
-                alert('Record has been acknowledged successfully!');
-            } else {
-                console.error('Error acknowledging record:', data.error);
-                alert('Failed to acknowledge the record.');
-            }
-        })
-        .catch(error => console.error('Error in AJAX call:', error));
-    }
+      let body = `user_id=${encodeURIComponent(userId)}&LabNo=${encodeURIComponent(labNo)}&Sex=${encodeURIComponent(data.Sex.trim())}&Age=${encodeURIComponent(data.Age.trim())}&Collected=${encodeURIComponent(data.Collected)}&Received=${encodeURIComponent(data.Received)}&Source=${encodeURIComponent(data.Source.trim())}&Name=${encodeURIComponent(data.Name.trim())}&Sample=${encodeURIComponent(data.Sample.trim())}&Isolate=${encodeURIComponent(data.Isolate.trim())}`;
+  
+      // Add antibiotics dynamically to the body of the request
+      for (let i = 1; i <= 18; i++) {
+          const antibioticKey = `Antibiotic${i}`;
+          if (data[antibioticKey]) {
+              body += `&${antibioticKey}=${encodeURIComponent(data[antibioticKey])}`;
+          }
+      }
+  
+      fetch('https://jo435.brighton.domains/ci601/records.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: body,
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              console.log('Record acknowledged:', data);
+              alert('Record has been acknowledged successfully!');
+          } else {
+              console.error('Error acknowledging record:', data.error);
+              alert('Failed to acknowledge the record.');
+          }
+      })
+      .catch(error => console.error('Error in AJAX call:', error));
+  }
+  
     
     
     
