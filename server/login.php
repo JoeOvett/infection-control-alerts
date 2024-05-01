@@ -3,7 +3,6 @@
 $is_invalid = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
     $mysqli = require __DIR__ . "/database.php";
     
     $sql = sprintf("SELECT * FROM user
@@ -33,10 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
             header("Location: https://infection-control-alerts.vercel.app/");
             exit;
+        } else {
+            $is_invalid = true;
         }
-        
-    
-    $is_invalid = true;
+    } else {
+        $is_invalid = true;
+    }
 }
 
 ?>
@@ -79,11 +80,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </body>
 </html>
 
-
-
-
-
-
-
-
-
+            
