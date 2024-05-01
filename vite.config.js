@@ -24,6 +24,8 @@ export default defineConfig({
         worthing: resolve(__dirname, 'src', 'worthing.html'),
         prh: resolve(__dirname, 'src', 'prh.html'),
         database: resolve(__dirname, 'src', 'database.html'),
+        session: resolve(__dirname, 'src', 'session.js'), // Add this line
+
       },
     },
   },
