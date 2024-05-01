@@ -235,14 +235,17 @@ nav ul li a:hover {
 }
 
 
+
+
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around; /* This will space your cards nicely */
-  align-items: flex-start; /* Align cards to the top */
-  max-width: 1300px; /* Maximum width of the container */
+  justify-content: center; /* Aligns items centrally within the container */
+  align-items: stretch; /* This will make sure that all cards align vertically */
+  gap: 20px; /* Maintain a uniform gap between the cards */
+  max-width: 1300px; /* Adjust this value based on your design requirements */
   margin: auto; /* Center the container on the page */
-  gap: 20px; /* Gap between the cards */
 }
 
 .card {
@@ -252,19 +255,26 @@ nav ul li a:hover {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  justify-content: space-between;
   width: 300px;
   height: 370px;
   color: #fff;
   box-shadow: 0 4px 8px #0000001a;
-  transition: transform .2s,box-shadow .3s;
-  margin-bottom: 20px
-  
+  transition: transform .2s, box-shadow .3s;
+  margin-bottom: 20px;
 }
+#restricted-content {
+  display: none; /* Initially hidden */
+  flex-wrap: wrap;
+  justify-content: center; /* This should match .card-container for alignment */
+  align-items: stretch; /* Ensures that cards align vertically */
+  gap: 20px;
+  max-width: 1300px; /* Adjust this value based on your design requirements */
+  margin: auto; /* Center the container on the page */
 
+}
 .card img {
   width: 100%;
   height: 150px;

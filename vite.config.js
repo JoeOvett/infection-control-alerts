@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { log } from 'console';
+import { sign } from 'crypto';
 
 const isCodeSandbox = 'SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env;
 
@@ -25,6 +27,8 @@ export default defineConfig({
         prh: resolve(__dirname, 'src', 'prh.html'),
         database: resolve(__dirname, 'src', 'database.html'),
         auth: resolve(__dirname, 'src', 'auth.js'), 
+        login: resolve(__dirname, 'src', 'login.html'),
+        signup: resolve(__dirname, 'src', 'signup.html'),
 
       },
     },
