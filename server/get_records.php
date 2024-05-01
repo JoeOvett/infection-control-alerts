@@ -1,9 +1,20 @@
 <?php
-require __DIR__ . "/database.php"; // Your existing database connection
+require __DIR__ . "/database.php";
 
-// Add these headers to handle CORS
-header('Access-Control-Allow-Origin: http://localhost:5173');  // Allow only this origin or use '*' to allow all
-header('Access-Control-Allow-Methods: GET, POST, OPTIONS');  // Adjust as necessary
+$allowedOrigins = [
+    'http://localhost:5173',  // Development
+    'https://infection-control-alerts.vercel.app'  // Production
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+} else {
+    header("HTTP/1.1 403 Access Forbidden");
+    exit('Access forbidden');
+}
+
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Content-Type: application/json');
 
 $sql = "SELECT * FROM acknowledged_records";

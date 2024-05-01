@@ -17,17 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($user) {
         
         if (password_verify($_POST["password"], $user["password_hash"])) {
-            
             session_start();
-            
             session_regenerate_id();
-            
             $_SESSION["user_id"] = $user["id"];
-            
+        
+            // Set a secure cookie with HttpOnly flag
+            setcookie("user_session", session_id(), [
+                'expires' => time() + 86400, // 1 day for example
+                'path' => '/',
+                'domain' => '.vercel.app', // Customize or remove domain depending on your setup
+                'secure' => true,
+                'httponly' => true,
+                'samesite' => 'None' // This is important for cross-domain cookies
+            ]);
+        
             header("Location: https://infection-control-alerts.vercel.app/");
             exit;
         }
-    }
+        
     
     $is_invalid = true;
 }

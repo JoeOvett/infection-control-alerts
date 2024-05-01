@@ -1,20 +1,40 @@
 <?php
-ini_set('display_errors', 0);
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
+// Log errors to a file for further investigation
 ini_set('log_errors', 1);
 ini_set('error_log', '/path_to_error_log');
 
+// Include the database connection file
 require __DIR__ . "/database.php";
 
-// Check database connection success
-if ($mysqli->connect_error) {
-    die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+// Define allowed origins for CORS
+$allowedOrigins = [
+    'http://localhost:5173',  // Development
+    'https://infection-control-alerts.vercel.app'  // Production
+];
+
+// Check if the request origin is allowed for CORS
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Access-Control-Max-Age: 3600'); // Cache preflight requests for 1 hour
 }
 
-header('Access-Control-Allow-Origin: http://localhost:5173');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+// Handle OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit(); // End the script for OPTIONS requests
+}
+
+// Set the content type to JSON
 header('Content-Type: application/json');
 
+// Initialize the response array
 $response = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
