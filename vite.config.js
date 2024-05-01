@@ -23,6 +23,7 @@ export default defineConfig({
         map: resolve(__dirname, 'src', 'map.html'),
         worthing: resolve(__dirname, 'src', 'worthing.html'),
         prh: resolve(__dirname, 'src', 'prh.html'),
+        database: resolve(__dirname, 'src', 'database.html'),
       },
     },
   },

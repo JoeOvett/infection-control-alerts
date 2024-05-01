@@ -6,6 +6,7 @@
     <title>Welcome to Infection Control Alerts</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="germs.png" />
+    <script src="session.js" defer></script>
 </head>
 <body class="landing-page">
     <div class="title-container">
@@ -19,13 +20,14 @@
                 <p>Sign in to your account</p>
             </div>
         </a>
-        <a href="rsch.html" class="card">
-            <img src="rsch_card.jpg" alt="Royal Sussex County Hospital">
-            <div class="card-content">
-            <h3>Royal Sussex County Hospital</h3>
-            <p>Explore the RSCH 3D Model</p>
-        </div>
-        </a>        
+        <div id="restricted-content" style="display:none;">
+            <a href="rsch.html" class="card">
+                <img src="rsch_card.jpg" alt="Royal Sussex County Hospital">
+                <div class="card-content">
+                    <h3>Royal Sussex County Hospital</h3>
+                    <p>Explore the RSCH 3D Model</p>
+                </div>
+            </a>       
         <a href="prh.html" class="card">
             <img src="prh_card.jpg" alt="Princess Royal Hospital">
             <div class="card-content">
@@ -61,7 +63,7 @@
                 <p>View the Database</p>
             </div>
         </a>
-        <a href="signout.html" class="card">
+        <a href="https://jo435.brighton.domains/ci601/logout.php" class="card">
             <img src="exit.png" alt="Sign Out" class="exit-icon">
             <div class="card-content">
                 <h3>Sign Out</h3>

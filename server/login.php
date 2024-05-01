@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             
             $_SESSION["user_id"] = $user["id"];
             
-            header("Location: index.php");
+            header("Location: https://infection-control-alerts.vercel.app/");
             exit;
         }
     }
@@ -34,33 +34,44 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/png" href="germs.png" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
-    
-    <h1>Login</h1>
-    
-    <?php if ($is_invalid): ?>
-        <em>Invalid login</em>
-    <?php endif; ?>
-    
-    <form method="post">
-        <label for="email">email</label>
-        <input type="email" name="email" id="email"
-               value="<?= htmlspecialchars($_POST["email"] ?? "") ?>">
-        
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-        
-        <button>Log in</button>
-    </form>
-    
+<body class="login-body">
+    <div class="wrapper">
+        <form method="post" class="login-form">
+            <h1>Login</h1>
+            <?php if ($is_invalid): ?>
+                <em class="error-message">Invalid login</em>
+            <?php endif; ?>
+
+            <div class="input-box">
+                <input type="email" name="email" id="email" placeholder="Email"
+                       value="<?= htmlspecialchars($_POST["email"] ?? '') ?>">
+                <i class='bx bx-envelope icon'></i> <!-- Email Icon -->
+            </div>
+            
+            <div class="input-box">
+                <input type="password" name="password" id="password" placeholder="Password">
+                <i class='bx bxs-lock-alt icon'></i> <!-- Padlock Icon -->
+            </div>
+            
+            <button type="submit" class="btn">Log in</button>
+            <div class="register-link">
+                <p>Don't have an account? <a href="signup.html">Register</a></p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
+
 
 
 

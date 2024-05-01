@@ -1,6 +1,11 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
+// Function to hide the loading overlay
+function hideLoadingOverlay() {
+  document.querySelector('.loading-overlay').style.display = 'none';
+}
+
 const loader = new Loader({
   apiKey: "AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw",
   version: "weekly",
@@ -12,7 +17,9 @@ loader.load().then(async () => {
     center: { lat: 51.13531071, lng: 0.001977888 },
     zoom: 8,
     mapId: "8e6deb7a6acd250c" // Ensure this is a valid Map ID from your Google Cloud Console
+    
   });
+
 
   // Ensure the AdvancedMarkerElement is loaded
   const { AdvancedMarkerElement } = google.maps.marker;
@@ -28,7 +35,7 @@ loader.load().then(async () => {
     let locations = await response.json();
 
     // Limit the number of locations to 1000
-    locations = locations.slice(0, 40);
+    locations = locations.slice(0, 400);
 
     // Log the number of locations received
     console.log(`Number of locations received: ${locations.length}`);
@@ -134,9 +141,11 @@ google.maps.event.addListener(infoWindow, 'domready', () => {
 
     // Initialize the marker clusterer with minimumClusterSize option
     new MarkerClusterer({ markers, map });
+    // Hide loading overlay after all tiles are loaded
+    google.maps.event.addListenerOnce(map, 'tilesloaded', hideLoadingOverlay);
   } catch (error) {
     console.error(error);
-  }       
+  }     
 });
 
 // Function to generate antibiotics content
@@ -157,4 +166,5 @@ function getAntibioticsContent(data) {
     // Close the unordered list tag
     content += '</ul>';
     return content;
+    
 }

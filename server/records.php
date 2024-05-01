@@ -33,9 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     for ($i = 1; $i <= 18; $i++) {
         if (isset($_POST["Antibiotic$i"])) {
-            $params["Antibiotic$i"] = $_POST["Antibiotic$i"];
+            $params["Antibiotic$i"] = filter_var($_POST["Antibiotic$i"], FILTER_SANITIZE_STRING);
         }
     }
+    
 
     $columns = implode(', ', array_keys($params));
     $placeholders = implode(', ', array_fill(0, count($params), '?'));
