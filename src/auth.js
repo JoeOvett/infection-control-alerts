@@ -4,13 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to check if the user is logged in
     function isLoggedIn() {
-        return !!localStorage.getItem('isLoggedIn');  // Simple check for login state
+        return !!localStorage.getItem('isLoggedIn'); // Simple check for login state
     }
 
-    // Set the display style of the restricted content if it exists and the user is logged in
-    if (isLoggedIn() && restrictedContent) {
-        restrictedContent.style.display = 'flex';
+    // Set the initial state of the restricted content based on login status
+    function updateRestrictedContentVisibility() {
+        if (restrictedContent) {
+            if (isLoggedIn()) {
+                restrictedContent.style.display = 'flex'; // Show the restricted content
+            } else {
+                restrictedContent.style.display = 'none'; // Hide the restricted content
+            }
+        }
     }
+    updateRestrictedContentVisibility(); // Call the function to set initial visibility
 
     // Handle the login form submission
     if (loginForm) {
@@ -33,11 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.success) {
                     console.log('Login successful');
                     localStorage.setItem('isLoggedIn', true); // Set login state
-                    // Optionally set the restricted content to display if login is processed on the same page
+                    // Set the restricted content to visible and accessible if login is successful
                     if (restrictedContent) {
-                        restrictedContent.style.display = 'flex';
+                        restrictedContent.classList.add('active');
                     }
                     window.location.href = 'https://infection-control-alerts.vercel.app'; // Redirect
+                   // window.location.href = 'http://localhost:5174'; // Redirect
+
                 } else {
                     console.error('Login failed', data.message);
                     document.querySelector('.error-message').textContent = data.message;

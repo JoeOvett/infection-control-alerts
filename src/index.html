@@ -14,59 +14,72 @@
     </div>
     <div class="card-container">
         <!-- Login card, always visible -->
-        <a href="login.html" class="card">
+        <a href="login.html" class="login-card">
             <img src="login.png" alt="User Settings" class="login-icon">
             <div class="card-content">
                 <h3>Login</h3>
                 <p>Sign in to your account</p>
             </div>
         </a>
-    
-        <!-- Container for restricted content, hidden initially -->
-        <div id="restricted-content" style="display:none;">
-            <a href="rsch.html" class="card">
+
+        <!-- Restricted content starts here -->
+        <div id="restricted-content">
+            <!-- RSCH card, position controlled via CSS -->
+            <a href="rsch.html" class="card rsch-card">
                 <img src="rsch_card.jpg" alt="Royal Sussex County Hospital">
                 <div class="card-content">
                     <h3>Royal Sussex County Hospital</h3>
                     <p>Explore the RSCH 3D Model</p>
                 </div>
             </a>
-            <a href="prh.html" class="card">
+
+            <!-- Princess Royal Hospital card -->
+            <a href="prh.html" class="card prh-card">
                 <img src="prh_card.jpg" alt="Princess Royal Hospital">
                 <div class="card-content">
                     <h3>Princess Royal</h3>
                     <p>View PRH Information</p>
                 </div>
             </a>
-            <a href="worthing.html" class="card">
+
+            <!-- Worthing Hospital card -->
+            <a href="worthing.html" class="card worthing-card">
                 <img src="worthing_card.jpg" alt="Worthing Hospital">
                 <div class="card-content">
                     <h3>Worthing Hospital</h3>
                     <p>Discover Worthing Details</p>
                 </div>
             </a>
-            <a href="map.html" class="card">
+
+            <!-- Map View card -->
+            <a href="map.html" class="card map-view-card">
                 <img src="map_card.jpg" alt="Map View">
                 <div class="card-content">
                     <h3>Map View</h3>
                     <p>Access the Map Overview</p>
                 </div>
             </a>
-            <a href="settings.html" class="card">
+
+            <!-- User Settings card 
+            <a href="settings.html" class="card settings-card">
                 <img src="gears.png" alt="User Settings" class="gear-icon">
                 <div class="card-content">
                     <h3>User Settings</h3>
                     <p>Adjust your preferences</p>
                 </div>
-            </a>
-            <a href="database.html" class="card">
+            </a>-->
+
+            <!-- Database card -->
+            <a href="database.html" class="card database-card">
                 <img src="data.png" alt="Database" class="data-icon">
                 <div class="card-content">
                     <h3>Database</h3>
                     <p>View the Database</p>
                 </div>
             </a>
-            <a href="https://jo435.brighton.domains/ci601/logout.php" class="card">
+
+            <!-- Sign Out card -->
+            <a href="https://jo435.brighton.domains/ci601/logout.php" class="card signout-card">
                 <img src="exit.png" alt="Sign Out" class="exit-icon">
                 <div class="card-content">
                     <h3>Sign Out</h3>
@@ -75,4 +88,6 @@
             </a>
         </div>
     </div>
-    
+</body>
+
+

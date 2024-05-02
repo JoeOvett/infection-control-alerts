@@ -43,12 +43,14 @@ html, body {
 }
 
 .login-icon {
-  width: 100%; /* Adjust based on your layout needs */
+  width: 50%; /* Smaller icon size relative to the badge */
   height: auto;
-  transition: opacity 0.3s ease-in-out; /* Smooth transition for the hover effect */
+  transition: transform 0.3s ease-in-out;
+  background-image: url('login.png'); /* Default icon image */
+  background-size: cover;
 }
 
-.card:hover .login-icon {
+.login-card:hover .login-icon {
   content: url('login.gif'); /* Change to animated GIF on hover */
 }
 
@@ -235,17 +237,58 @@ nav ul li a:hover {
 }
 
 
+.login-card {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  border-radius: 50%;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 70px;
+  left: calc(40% - 560px);
+  z-index: 1001;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-icon {
+  width: 50%; /* Smaller icon size relative to the badge */
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.login-label {
+  font-family: "Poppins", sans-serif; /* Consistent font with the login/signup forms */
+  font-size: 0.9em; /* Adjusted for readability */
+  margin-top: 5px; /* Space between icon and text */
+}
+
+.login-card:hover {
+  transform: scale(1.1); /* Scale up on hover for interactivity */
+  cursor: pointer;
+  border-color: rgba(255, 255, 255, 0.5); /* Brighter border on hover */
+  background-color: rgba(255, 255, 255, 0.3); /* Slightly more visible background on hover */
+}
+
 
 
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Aligns items centrally within the container */
-  align-items: stretch; /* This will make sure that all cards align vertically */
-  gap: 20px; /* Maintain a uniform gap between the cards */
-  max-width: 1300px; /* Adjust this value based on your design requirements */
-  margin: auto; /* Center the container on the page */
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 20px auto; /* Normal margin */
+  transition: margin-top 0.3s ease; /* Smooth transition for margin adjustments */
 }
 
 .card {
@@ -316,8 +359,76 @@ nav ul li a:hover {
   font-size: 1em;
   text-align: center
 }
-@media only screen and (min-width: 1024px) {
-  .landing-page {
-    justify-content: center; /* This will vertically center the cards on desktop */
+/* Landscape orientation */
+@media only screen and (max-device-width: 1024px) and (orientation: landscape) {
+  .login-card {
+    position: relative; /* Change position to relative */
+    top: unset; /* Reset top position */
+    margin-top: 0px; /* Add margin to create space below the title */
+    width: 220px; /* Fixed size for the badge */
+    height: 220px; /* Fixed size to maintain the circle shape */
+    left: 0%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for 3D effect */
   }
 }
+
+/* Media queries refined for smooth centering */
+@media only screen and (max-width: 1100px) {
+  .login-card {
+    position: relative; 
+    top: 0px;
+    left: 0%;
+    transform: translateX(-0%);
+    margin-bottom: 0px; 
+  }
+
+  .card-container {
+    margin-top: 0px; /* Adjust this value to ensure enough space for the login badge */
+  }
+}
+@media only screen and (max-width: 768px) {
+  .login-card {
+    position: relative; /* Change position to relative */
+    top: unset; /* Reset top position */
+    left: 0%; /* Ensure central alignment */
+    margin-top: 0px; /* Add margin to create space below the title */
+    width: 220px; /* Fixed size for the badge */
+    height: 220px; /* Fixed size to maintain the circle shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: translateX(-0%); /* Maintain horizontal centering */
+
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for 3D effect */
+  }
+
+/* Additional media query to handle intermediate window sizes */
+@media only screen and (max-width: 900px) {
+  .login-card {
+    top: 0px;
+    left: 0%;
+    transform: translateX(-0%);
+  }
+}
+  .login-icon {
+    width: 50%; /* Smaller icon size relative to the badge */
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .login-label {
+    font-family: "Poppins", sans-serif; /* Consistent font with the login/signup forms */
+    font-size: 0.9em; /* Adjusted for readability */
+    margin-top: 5px; /* Space between icon and text */
+  }
+}
+
+
