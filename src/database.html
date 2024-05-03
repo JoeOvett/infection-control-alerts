@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Display acknowledged results with newest records first -->
+    <!-- Time of server is -1 hour from UK -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database Records</title>
     <link rel="stylesheet" href="./style.css">
@@ -9,12 +11,13 @@
     <style>
         body { 
             font-family: Arial, sans-serif; 
-            margin-top: 20px; /* Add top margin to push content below the navbar */
+            margin-top: 20px; /*top margin to push content below the navbar */
         }
+        /* Database table for user */
         table { 
             border-collapse: collapse; 
             width: 100%; 
-            margin-top: 20px; 
+            margin-top: 40px; 
         }
         th, td { 
             border: 1px solid #4d4552; 
@@ -36,15 +39,15 @@
 <body>
     <nav>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/map.html">Map</a></li>
-          <li><a href="/database.html">Database</a></li>
-          <li><a href="/rsch.html">RSCH</a></li>
-          <li><a href="/prh.html">PRH</a></li>
-          <li><a href="/worthing.html">Worthing</a></li>
-          <li><a href="/Signout.html">Sign Out</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/map.html">Map</a></li>
+            <li><a href="/database.html">Database</a></li>
+            <li><a href="/rsch.html">RSCH</a></li>
+            <li><a href="/prh.html">PRH</a></li>
+            <li><a href="/worthing.html">Worthing</a></li>
+            <li><a href="/Signout.html">Sign Out</a></li>
         </ul>
-      </nav>
+    </nav>
     <table>
         <thead>
             <tr>
@@ -74,10 +77,16 @@
                     console.error('Failed to load data:', data.error);
                 } else {
                     console.log('Fetched data:', data); // Detailed log of the fetched data
+                    
+                    // Sort the records by acknowledged timestamp in descending order
+                    data.sort((a, b) => {
+                        return new Date(b.acknowledged_at) - new Date(a.acknowledged_at);
+                    });
+
                     const tableBody = document.querySelector('table tbody');
                     data.forEach(record => {
                         const row = document.createElement('tr');
-        
+
                         let antibioticsContent = '';
                         for (let i = 1; i <= 18; i++) {
                             const antibioticKey = `Antibiotic${i}`;
@@ -94,7 +103,7 @@
                                 }
                             }
                         }
-        
+
                         row.innerHTML = `
                             <td>${record.Name}</td>
                             <td>${record.LabNo.trim()}</td>
@@ -116,6 +125,5 @@
             });
         });
     </script>
-        
 </body>
 </html>

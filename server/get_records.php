@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . "/database.php";
-
+// get the records from the acknowledged_records table
 $allowedOrigins = [
     'http://localhost:5173',  // Development
     'https://infection-control-alerts.vercel.app'  // Production

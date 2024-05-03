@@ -1,6 +1,6 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
-
+// The main map functionallity is here
 // Function to hide the loading overlay
 function hideLoadingOverlay() {
   document.querySelector('.loading-overlay').style.display = 'none';
@@ -16,7 +16,7 @@ loader.load().then(async () => {
   const map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 51.04093204, lng: 0.149421913 },
     zoom: 10,
-    mapId: "8e6deb7a6acd250c" // Ensure this is a valid Map ID from your Google Cloud Console
+    mapId: "8e6deb7a6acd250c" // My pink map style for Google Maps API
     
   });
 
@@ -64,7 +64,7 @@ loader.load().then(async () => {
     function acknowledgeRecord(labNo, userId, data) {
       let body = `user_id=${encodeURIComponent(userId)}&LabNo=${encodeURIComponent(labNo)}&Sex=${encodeURIComponent(data.Sex.trim())}&Age=${encodeURIComponent(data.Age.trim())}&Collected=${encodeURIComponent(data.Collected)}&Received=${encodeURIComponent(data.Received)}&Source=${encodeURIComponent(data.Source.trim())}&Name=${encodeURIComponent(data.Name.trim())}&Sample=${encodeURIComponent(data.Sample.trim())}&Isolate=${encodeURIComponent(data.Isolate.trim())}`;
   
-      // Add antibiotics dynamically to the body of the request
+      // Add up to 18 antibiotics dynamically to the body of the request
       for (let i = 1; i <= 18; i++) {
           const antibioticKey = `Antibiotic${i}`;
           if (data[antibioticKey]) {

@@ -1,4 +1,6 @@
 /**
+ * 3D models of Royal Sussex County Hospital showing results from
+ * Accident and Emergency, Level 14, Renal, Pickford Ward and Courtyard.
  * Fetch data from the backend and process it to update the 3D model.
  */
 function fetchData() {
@@ -15,7 +17,7 @@ function fetchData() {
 }
 
 /**
- * Update the 3D model with data specific to the "RAE", "RCOUR7", and "RL14" sources.
+ * Update the 3D model with data specific to the ward.
  */
 function update3DModelWithData(data) {
     const raeData = data.filter(item => item.Source.trim() === "RAE");

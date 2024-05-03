@@ -7,7 +7,7 @@ const isCodeSandbox = 'SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in proc
 
 export default defineConfig({
   root: 'src/',
-  // If you have a static folder at the project root for unprocessed assets, use this line:
+  // If you static folder at the project root for unprocessed assets, use this line:
   publicDir: '../static',
   base: './',
   server: {

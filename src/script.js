@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { gsap } from 'gsap'
 
 /**
- * Loaders
+ * The main 3D model functionallity is all here 
  */
 const loadingBarElement = document.querySelector('.loading-bar')
 const loadingGif = document.querySelector('.loading-container img');
@@ -23,7 +23,7 @@ const loadingManager = new THREE.LoadingManager(
         loadingBarElement.classList.add('ended')
         loadingBarElement.style.transform = ''
 
-        // Optionally fade out the loading text here as well
+        //  fade out the loading text 
         gsap.to(".loading-text", { duration: 1, opacity: 0, onComplete: () => {
             document.querySelector('.loading-text').style.display = 'none';
             document.querySelector('.loading-container img').style.display = 'none';
@@ -37,7 +37,7 @@ const loadingManager = new THREE.LoadingManager(
 },
 
 
-    // Progress
+    // Progress bar
     (itemUrl, itemsLoaded, itemsTotal) => {
         // Calculate the progress and update the loadingBarElement
         const progressRatio = itemsLoaded / itemsTotal
@@ -47,20 +47,18 @@ const loadingManager = new THREE.LoadingManager(
 const gltfLoader = new GLTFLoader(loadingManager)
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 
-/**
- * Base
- */
-// Debug
+
+// Debug 
 const debugObject = {}
 
-// Canvas
+// Canvas for the 3D model
 const canvas = document.querySelector('canvas.webgl')
 
-// Scene
+// Scene creation
 const scene = new THREE.Scene()
 
 /**
- * Overlay
+ * Overlay for geometry
  */
 const overlayGeometry = new THREE.PlaneGeometry(2, 2, 1, 1)
 const overlayMaterial = new THREE.ShaderMaterial({
@@ -103,7 +101,7 @@ const updateAllMaterials = () => {
 }
 
 /**
- * Environment map
+ * Environment map textures
  */
 const environmentMap = cubeTextureLoader.load([
     '/textures/environmentMaps/1/px.jpg',
@@ -122,7 +120,7 @@ scene.environment = environmentMap
 debugObject.envMapIntensity = 2.5
 
 /**
- * Models
+ * Models of hospital buildings
  */
 const path = window.location.pathname;
 let modelFile = 'rsch.gltf'; // default model
@@ -146,7 +144,7 @@ gltfLoader.load(
 
 
 /**
- * Points of interest
+ * Points coordinates for results to be displayed from the backend sql database
  * point coordinates order X Y Z
  */
 const raycaster = new THREE.Raycaster()
@@ -175,7 +173,7 @@ const points = [
 ]
 
 /**
- * Lights
+ * Lights for the scene to illuminate the 3D models
  */
 const directionalLight = new THREE.DirectionalLight('#ffffff', 3)
 directionalLight.castShadow = true
@@ -186,7 +184,7 @@ directionalLight.position.set(0.25, 3, -2.25)
 scene.add(directionalLight)
 
 /**
- * Sizes
+ * Sizes for the 3D models
  */
 const sizes = {
     width: window.innerWidth,
@@ -208,7 +206,7 @@ window.addEventListener('resize', () => {
 })
 
 /**
- * Camera
+ * Camera for viewing the 3D models
  */
 // Default camera position
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
@@ -222,7 +220,7 @@ controls.autoRotate = true  // Enable auto rotate
 controls.autoRotateSpeed = -0.1  // Set the rotation speed/direction
 
 /**
- * Renderer
+ * Renderer for the 3D models
  */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -238,7 +236,7 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
- * Animate
+ * Animate the 3D models
  */
 const tick = () => {
     // Update controls
@@ -289,8 +287,8 @@ const tick = () => {
 
     // Render
     renderer.render(scene, camera)
-
-    console.log('Camera position:', camera.position.x, camera.position.y, camera.position.z);
+    // camera position coordinates in DEV browser   
+    // console.log('Camera position:', camera.position.x, camera.position.y, camera.position.z);
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)

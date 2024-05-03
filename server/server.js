@@ -15,7 +15,7 @@ app.use(cors({
     credentials: true
 }));
 
-// Users database simulation
+// The database simulation
 const users = {
     admin: { id: 1, username: 'admin', password: 'secret' }
 };

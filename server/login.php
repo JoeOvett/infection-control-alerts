@@ -1,5 +1,5 @@
 <?php
-
+//heavily modified login.php file. README.md has more information on original source
 header("Access-Control-Allow-Origin: https://infection-control-alerts.vercel.app");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             setcookie("user_session", session_id(), [
                 'expires' => time() + 86400, // 1 day
                 'path' => '/',
-                'domain' => '.vercel.app', // Ensure this is configured correctly for your domain
+                'domain' => '.vercel.app', // Ensure this is configured correctly for frontend domain
                 'secure' => true,
                 'httponly' => true,
                 'samesite' => 'None'

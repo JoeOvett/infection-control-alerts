@@ -376,7 +376,7 @@ nav ul li a:hover {
   justify-content: center; /* This should match .card-container for alignment */
   align-items: stretch; /* Ensures that cards align vertically */
   gap: 20px;
-  max-width: 1300px; /* Adjust this value based on your design requirements */
+  max-width: 1300px; 
   margin: auto; /* Center the container on the page */
 }
 
@@ -460,7 +460,7 @@ nav ul li a:hover {
   }
 
   .card-container {
-    margin-top: 0px; /* Adjust this value to ensure enough space for the login badge */
+    margin-top: 0px; /*value to ensure enough space for the login badge */
   }
 }
 @media only screen and (max-width: 768px) {

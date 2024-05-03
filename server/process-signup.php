@@ -1,5 +1,6 @@
 <?php
-
+//process the signup form
+//modified from original source. README.md has more information on original source
 if (empty($_POST["name"])) {
     die("Name is required");
 }

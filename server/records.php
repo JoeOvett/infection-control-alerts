@@ -1,4 +1,6 @@
 <?php
+// SQL query to create the acknowledged_records table
+// for each map marker acknowledge the record and delete it from the results2 table
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -7,12 +9,12 @@ error_reporting(E_ALL);
 ini_set('log_errors', 1);
 ini_set('error_log', '/path_to_error_log');
 
-// Include the database connection file
+// Include the database.php connection file
 require __DIR__ . "/database.php";
 
 // Define allowed origins for CORS
 $allowedOrigins = [
-    'http://localhost:5173',  // Development
+    'http://localhost:5173',  // Development. Change the port number to match your environment
     'https://infection-control-alerts.vercel.app'  // Production
 ];
 
@@ -36,13 +38,13 @@ header('Content-Type: application/json');
 
 // Initialize the response array
 $response = [];
-
+// the sql query to insert the data into the acknowledged_records table
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $params = [
         'user_id' => filter_var($_POST['user_id'] ?? '', FILTER_SANITIZE_NUMBER_INT),
         'LabNo' => trim(filter_var($_POST['LabNo'] ?? '', FILTER_SANITIZE_STRING)),
         'Sex' => filter_var($_POST['Sex'] ?? '', FILTER_SANITIZE_STRING),
-        'Age' => filter_var($_POST['Age'] ?? '', FILTER_SANITIZE_NUMBER_INT), // Assuming age is a number
+        'Age' => filter_var($_POST['Age'] ?? '', FILTER_SANITIZE_NUMBER_INT), 
         'Collected' => filter_var($_POST['Collected'] ?? '', FILTER_SANITIZE_STRING),
         'Received' => filter_var($_POST['Received'] ?? '', FILTER_SANITIZE_STRING),
         'Source' => filter_var($_POST['Source'] ?? '', FILTER_SANITIZE_STRING),
@@ -50,18 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'Sample' => filter_var($_POST['Sample'] ?? '', FILTER_SANITIZE_STRING),
         'Isolate' => filter_var($_POST['Isolate'] ?? '', FILTER_SANITIZE_STRING)
     ];
-
+// loop through the antibiotics and add them to the params array
     for ($i = 1; $i <= 18; $i++) {
         if (isset($_POST["Antibiotic$i"])) {
             $params["Antibiotic$i"] = filter_var($_POST["Antibiotic$i"], FILTER_SANITIZE_STRING);
         }
     }
     
-
+    // Prepare the insert SQL query
     $columns = implode(', ', array_keys($params));
     $placeholders = implode(', ', array_fill(0, count($params), '?'));
     $sql = "INSERT INTO acknowledged_records ($columns) VALUES ($placeholders)";
-
+    // Prepare the SQL statement
     if ($stmt = $mysqli->prepare($sql)) {
         $types = str_repeat('s', count($params));
         $stmt->bind_param($types, ...array_values($params));
@@ -90,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405);
     $response['error'] = 'Invalid request method';
 }
-
+// Return the response in JSON format
 echo json_encode($response);
 exit();
 ?>

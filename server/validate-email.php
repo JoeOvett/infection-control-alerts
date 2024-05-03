@@ -1,5 +1,5 @@
 <?php
-
+// server/validate-email.php from user table
 $mysqli = require __DIR__ . "/database.php";
 
 $sql = sprintf("SELECT * FROM user

@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.querySelector('.login-form');
     const restrictedContent = document.getElementById('restricted-content');
-
+    // Frontend code for the login form and restricted content visibility
     // Function to check if the user is logged in
+    // Line 51 for changing production and development redirect
     function isLoggedIn() {
         return !!localStorage.getItem('isLoggedIn'); // Simple check for login state
     }
@@ -47,8 +48,8 @@ function updateRestrictedContentVisibility() {
                     if (restrictedContent) {
                         restrictedContent.classList.add('active');
                     }
-                    window.location.href = 'https://infection-control-alerts.vercel.app'; // Redirect
-                   // window.location.href = 'http://localhost:5173'; // Redirect
+                    window.location.href = 'https://infection-control-alerts.vercel.app'; // Production redirect
+                   // window.location.href = 'http://localhost:5173'; // Development redirect
 
                 } else {
                     console.error('Login failed', data.message);

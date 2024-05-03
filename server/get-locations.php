@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-
+// match the location coordinates of results2 and location code from locations1
 // Existing database connection code
 $mysqli = require __DIR__ . "/database.php";
 
