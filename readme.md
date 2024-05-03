@@ -5,7 +5,17 @@ Download [Node.js](https://nodejs.org/en/download/).
 Run these followed commands:
 
 ``` bash
-# Install dependencies (only the first time)
+ Install dependencies (only the first time)
+In console, run
+inpm init
+npm install
+set package name e.g. ica
+Version: 1.0.0
+Entry-point: package.json
+git repository:
+keywords:
+author:
+license: (ISC)
 npm install
 
 # Run the local server at localhost. Live is the default environmet
