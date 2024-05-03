@@ -1,2 +1,0 @@
-async function e(){try{(await(await fetch("https://jo435.brighton.domains/ci601/check_auth.php",{credentials:"include"})).json()).isAuthenticated?(console.log("User is authenticated"),o()):console.log("User is not authenticated, would redirect to login.")}catch(t){console.error("Error checking authentication:",t)}}function o(){console.log("Loading map...")}e();
-//# sourceMappingURL=map_auth-bf9609fa.js.map
