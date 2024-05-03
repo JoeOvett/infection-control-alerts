@@ -5,7 +5,7 @@ Download [Node.js](https://nodejs.org/en/download/).
 Run these followed commands:
 
 ``` bash
- Install dependencies (only the first time)
+Install dependencies (only the first time)
 In console, run
 inpm init
 npm install
