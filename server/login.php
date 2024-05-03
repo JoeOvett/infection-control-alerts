@@ -1,4 +1,5 @@
 <?php
+
 header("Access-Control-Allow-Origin: https://infection-control-alerts.vercel.app");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -53,4 +54,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo json_encode(["success" => false, "message" => "Invalid login credentials"]);
     exit;
 }
+
 ?>

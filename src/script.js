@@ -7,8 +7,10 @@ import { gsap } from 'gsap'
  * Loaders
  */
 const loadingBarElement = document.querySelector('.loading-bar')
+const loadingGif = document.querySelector('.loading-container img');
 
 let sceneReady = false
+
 const loadingManager = new THREE.LoadingManager(
 // Loaded
 () => {
@@ -24,6 +26,8 @@ const loadingManager = new THREE.LoadingManager(
         // Optionally fade out the loading text here as well
         gsap.to(".loading-text", { duration: 1, opacity: 0, onComplete: () => {
             document.querySelector('.loading-text').style.display = 'none';
+            document.querySelector('.loading-container img').style.display = 'none';
+
         }});
     }, 500)
 
@@ -148,15 +152,15 @@ gltfLoader.load(
 const raycaster = new THREE.Raycaster()
 const points = [
     {
-        position: new THREE.Vector3(1.55, 4, -0.6),
+        position: new THREE.Vector3(1.64, 1.77, -0.58),
         element: document.querySelector('.point-0')
     },
     {
-        position: new THREE.Vector3(0.5, 4, -1.6),
+        position: new THREE.Vector3(4.74, -0.55, -6.51),
         element: document.querySelector('.point-1')
     },
     {
-        position: new THREE.Vector3(1.6, 3, -0.7),
+        position: new THREE.Vector3(3.91, 1.28, 2.89),
         element: document.querySelector('.point-2')
     },
     {
@@ -206,16 +210,16 @@ window.addEventListener('resize', () => {
 /**
  * Camera
  */
-// Base camera
+// Default camera position
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(6.1, 2.7, -3.8)
+camera.position.set(10.12, 4.0, -3.95)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 controls.autoRotate = true  // Enable auto rotate
-controls.autoRotateSpeed = 0.1  // Set the rotation speed
+controls.autoRotateSpeed = -0.1  // Set the rotation speed/direction
 
 /**
  * Renderer

@@ -1,6 +1,3 @@
-// map_auth.js
-
-// Function to check if user is authenticated
 async function checkAuthentication() {
     try {
         const response = await fetch('https://jo435.brighton.domains/ci601/check_auth.php', {
@@ -9,15 +6,20 @@ async function checkAuthentication() {
 
         const data = await response.json();
 
-        // If user is not authenticated, redirect to login page
         if (!data.isAuthenticated) {
-            window.location.href = '/login.html';
+            console.log('User is not authenticated, would redirect to login.');
+            // Handle redirection here if needed
+        } else {
+            console.log('User is authenticated');
+            initMap();
         }
     } catch (error) {
         console.error('Error checking authentication:', error);
-        window.location.href = '/login.html';
     }
 }
 
-// Call the authentication check on page load
+function initMap() {
+    console.log("Loading map...");
+}
+
 checkAuthentication();

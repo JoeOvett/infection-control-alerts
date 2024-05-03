@@ -29,8 +29,8 @@ export default defineConfig({
         auth: resolve(__dirname, 'src', 'auth.js'), 
         login: resolve(__dirname, 'src', 'login.html'),
         signup: resolve(__dirname, 'src', 'signup.html'),
-
-      },
+        map_auth: resolve(__dirname, 'src', 'map_auth.js'),
+        modelresults: resolve(__dirname, 'src', 'modelresults.js'),},
     },
   },
 });

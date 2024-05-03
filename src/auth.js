@@ -7,16 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return !!localStorage.getItem('isLoggedIn'); // Simple check for login state
     }
 
-    // Set the initial state of the restricted content based on login status
-    function updateRestrictedContentVisibility() {
-        if (restrictedContent) {
-            if (isLoggedIn()) {
-                restrictedContent.style.display = 'flex'; // Show the restricted content
-            } else {
-                restrictedContent.style.display = 'none'; // Hide the restricted content
-            }
+// Set the initial state of the restricted content based on login status
+function updateRestrictedContentVisibility() {
+    if (restrictedContent) {
+        if (isLoggedIn()) {
+            restrictedContent.classList.add('active'); // Add the active class to show the restricted content
+            document.getElementById('login-message').style.display = 'none'; // Hide the login message
+        } else {
+            restrictedContent.classList.remove('active'); // Remove the active class to hide the restricted content
+            document.getElementById('login-message').style.display = 'block'; // Show the login message
         }
     }
+}
+
     updateRestrictedContentVisibility(); // Call the function to set initial visibility
 
     // Handle the login form submission
@@ -45,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         restrictedContent.classList.add('active');
                     }
                     window.location.href = 'https://infection-control-alerts.vercel.app'; // Redirect
-                   // window.location.href = 'http://localhost:5174'; // Redirect
+                   // window.location.href = 'http://localhost:5173'; // Redirect
 
                 } else {
                     console.error('Login failed', data.message);
@@ -55,7 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                document.querySelector('.error-message').textContent = 'Login failed due to a network error.';
+                if (error instanceof SyntaxError) {
+                    // Handle unexpected non-JSON response
+                    console.error('Unexpected non-JSON response from the server');
+                    document.querySelector('.error-message').textContent = 'Login failed due to a server error.';
+                } else {
+                    // Handle network error or other exceptions
+                    console.error('Login failed due to a network error or other exception:', error);
+                    document.querySelector('.error-message').textContent = 'Login failed due to a network error or other exception.';
+                }
                 document.querySelector('.error-message').style.display = 'block';
             });
         });

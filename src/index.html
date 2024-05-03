@@ -11,11 +11,15 @@
 <body class="landing-page">
     <div class="title-container">
         <h1>Infection Control Alerts</h1>
+        <p id="login-message">Please log in to view content</p>
+
     </div>
+    <div id="login-message" style="display: none;">Please log in</div>
+
     <div class="card-container">
         <!-- Login card, always visible -->
         <a href="login.html" class="login-card">
-            <img src="login.png" alt="User Settings" class="login-icon">
+            <img src="login.png" alt="Sign in" class="login-icon">
             <div class="card-content">
                 <h3>Login</h3>
                 <p>Sign in to your account</p>
@@ -71,7 +75,7 @@
 
             <!-- Database card -->
             <a href="database.html" class="card database-card">
-                <img src="data.png" alt="Database" class="data-icon">
+                <img src="data.png" alt="Database" class="data-icon" style="max-width: 150px;">
                 <div class="card-content">
                     <h3>Database</h3>
                     <p>View the Database</p>
@@ -80,7 +84,7 @@
 
             <!-- Sign Out card -->
             <a href="https://jo435.brighton.domains/ci601/logout.php" class="card signout-card">
-                <img src="exit.png" alt="Sign Out" class="exit-icon">
+                <img src="exit.png" alt="Sign Out" class="exit-icon" style="max-width: 150px;">
                 <div class="card-content">
                     <h3>Sign Out</h3>
                     <p>Log out of your account</p>

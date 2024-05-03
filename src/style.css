@@ -22,6 +22,46 @@ html, body {
   align-items: center;
   z-index: 999; /* Ensure it's on top of everything */
 }
+.loading-gif {
+  position: fixed;
+  top: calc(50% + 20px); /* Adjust the distance below the loading bar */
+  left: 50%;
+  width: 10px; /* Adjust the width of the loading GIF */
+  height: auto;
+  transform: translateX(-50%);
+  z-index: 999; /* Ensure it's on top of everything */
+}
+
+.loading-gif img {
+  width: 100px; /* Adjust the width of the loading GIF */
+  height: auto;
+}
+
+@keyframes glow {
+  0%, 100% {
+      box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+  }
+  50% {
+      box-shadow: 0 0 50px rgb(255, 233, 105);
+  }
+}
+
+#login-message {
+  display: none; /* Start hidden */
+  background: linear-gradient(to top right, rgba(255, 240, 245, 0.9), rgba(255, 182, 193, 0.9)); /* Diagonal gradient from bottom left to top right */
+  border: 3px solid rgba(147, 112, 219, 0.8); /* Soft purple border */
+  color: rgba(75, 0, 130, 0.9); /* Dark purple text color */
+  font-size: 20px; /* Large font size */
+  padding: 10px 20px; /* Padding around the text */
+  margin: 20px auto; /* Center the message horizontally */
+  width: 20%; /* Set a specific width */
+  text-align: center; /* Center the text inside the box */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
+  border-radius: 5px; /* Optional: rounded corners */
+  animation: glow 2s ease-in-out infinite; /* Apply the glow animation */
+
+}
+
 
 .loading-overlay img {
   width: 100px; /* Adjust the width of the loading GIF */
@@ -50,15 +90,16 @@ html, body {
   background-size: cover;
 }
 
-.login-card:hover .login-icon {
-  content: url('login.gif'); /* Change to animated GIF on hover */
-}
+
 
 .data-icon {
-  width: 100%; /* Adjust based on your layout needs */
-  height: auto;
+  width: auto; /* Adjust based on your layout needs */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 150px; /* Set a maximum height to prevent oversized images */
+  object-fit: contain; /* Ensure the image fits within its container */
   transition: opacity 0.3s ease-in-out; /* Smooth transition for the hover effect */
 }
+
 
 .card:hover .data-icon {
   content: url('data.gif'); /* Change to animated GIF on hover */
@@ -129,6 +170,10 @@ html, body {
   transform: translateY(-50%);
   text-align: center
 }
+.loading-container img {
+  width: 50px; /* Adjust the width of the loading GIF */
+  height: auto;
+}
 
 .loading-text {
   color: #ff0095;
@@ -141,7 +186,7 @@ html, body {
 .loading-bar.ended {
   transform: scaleX(0);
   transform-origin: 100% 0;
-  transition: transform 1.5s ease-in-out
+  transition: transform 1.5s ease-out, height 0s; /* Ease out the transform and keep the height stable */
 }
 
 .point {
@@ -179,7 +224,7 @@ html, body {
   position: absolute;
   top: 30px;
   left: -120px;
-  width: 200px;
+  width: 300px;
   padding: 20px;
   border-radius: 4px;
   background: #00000077;
@@ -237,6 +282,22 @@ nav ul li a:hover {
 }
 
 
+/* Media query for smaller mobile screens */
+@media screen and (max-width: 768px) {
+  nav ul {
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: flex-start; /* Start from the left */
+  }
+
+  nav ul li {
+    margin: 10px; /* Add some margin between items */
+    white-space: nowrap; /* Prevent items from wrapping onto multiple lines */
+  }
+
+  nav ul li a {
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+}
 .login-card {
   background-color: rgba(255, 255, 255, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -284,7 +345,7 @@ nav ul li a:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start; /* Adjusted alignment to start */
   gap: 20px;
   max-width: 1100px;
   margin: 20px auto; /* Normal margin */
@@ -308,16 +369,26 @@ nav ul li a:hover {
   transition: transform .2s, box-shadow .3s;
   margin-bottom: 20px;
 }
+
 #restricted-content {
-  display: none; /* Initially hidden */
+  display: flex; /* Initially visible */
   flex-wrap: wrap;
   justify-content: center; /* This should match .card-container for alignment */
   align-items: stretch; /* Ensures that cards align vertically */
   gap: 20px;
   max-width: 1300px; /* Adjust this value based on your design requirements */
   margin: auto; /* Center the container on the page */
-
 }
+
+#restricted-content:not(.active) .card {
+  opacity: 0.7; /* Make cards transparent when not active */
+  cursor: not-allowed; /* Show not-allowed cursor to indicate the card is not clickable */
+  pointer-events: none;
+  box-shadow: 0 4px 8px #0000001a;
+  transition: transform .2s, box-shadow .3s;
+}
+
+
 .card img {
   width: 100%;
   height: 150px;

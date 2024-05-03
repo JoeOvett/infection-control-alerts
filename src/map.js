@@ -14,8 +14,8 @@ const loader = new Loader({
 
 loader.load().then(async () => {
   const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 51.13531071, lng: 0.001977888 },
-    zoom: 8,
+    center: { lat: 51.04093204, lng: 0.149421913 },
+    zoom: 10,
     mapId: "8e6deb7a6acd250c" // Ensure this is a valid Map ID from your Google Cloud Console
     
   });
@@ -140,7 +140,8 @@ google.maps.event.addListener(infoWindow, 'domready', () => {
     console.log(`Number of markers created: ${markers.length}`);
 
     // Initialize the marker clusterer with minimumClusterSize option
-    new MarkerClusterer({ markers, map });
+    new MarkerClusterer({ markers, map, maxZoom: 1, minimumClusterSize: 5});
+    
     // Hide loading overlay after all tiles are loaded
     google.maps.event.addListenerOnce(map, 'tilesloaded', hideLoadingOverlay);
   } catch (error) {
