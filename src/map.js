@@ -7,7 +7,7 @@ function hideLoadingOverlay() {
 }
 
 const loader = new Loader({
-  apiKey: "AIzaSyCMlg3335BMxPO51I7ZMpp-OXsTYCAaxYw",
+  apiKey: "Google Maps api key here",
   version: "weekly",
   libraries: ["places", "marker"]
 });
